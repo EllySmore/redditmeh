@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Reddit Meh</string>
+    <string name="action_settings">Settings</string>
+    <string name="drawer_open">Open Drawer</string>
+    <string name="drawer_close">Close Drawer</string>
+
+    <!--Navigation -->
+    <string name="front_page">front page</string>
+    <string name="aww">aww</string>
+    <string name="funny">funny</string>
+    <string name="pics">pics</string>
+    <string name="programming">programming</string>
+    <string name="shower_thoughts">Showerthoughts</string>
+
+</resources>
