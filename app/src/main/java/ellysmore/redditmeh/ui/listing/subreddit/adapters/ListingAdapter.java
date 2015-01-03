@@ -1,4 +1,4 @@
-package ellysmore.redditmeh.ui.subreddit.adapters;
+package ellysmore.redditmeh.ui.listing.subreddit.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,8 +7,8 @@ import android.widget.BaseAdapter;
 
 import ellysmore.redditmeh.R;
 import ellysmore.redditmeh.api.models.Listing.Data_;
-import ellysmore.redditmeh.ui.subreddit.models.ListingDisplayInfo;
-import ellysmore.redditmeh.ui.subreddit.widgets.ListingRow;
+import ellysmore.redditmeh.ui.listing.subreddit.models.ListingDisplayInfo;
+import ellysmore.redditmeh.ui.listing.subreddit.widgets.ListingRow;
 
 public class ListingAdapter extends BaseAdapter {
 

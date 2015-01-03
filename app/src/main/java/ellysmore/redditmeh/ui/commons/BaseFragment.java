@@ -1,7 +1,6 @@
 package ellysmore.redditmeh.ui.commons;
 
 import com.octo.android.robospice.SpiceManager;
-import com.octo.android.robospice.SpiceService;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
@@ -76,6 +75,5 @@ public class BaseFragment extends Fragment {
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
         ft.commit();
     }
-
 
 }

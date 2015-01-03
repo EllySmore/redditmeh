@@ -1,4 +1,4 @@
-package ellysmore.redditmeh.ui.subreddit.widgets;
+package ellysmore.redditmeh.ui.listing.subreddit.widgets;
 
 import com.squareup.picasso.Picasso;
 

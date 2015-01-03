@@ -1,10 +1,9 @@
-package ellysmore.redditmeh.ui.frontpage;
+package ellysmore.redditmeh.ui.listing.frontpage;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import butterknife.ButterKnife;
@@ -13,14 +12,12 @@ import ellysmore.redditmeh.Constants;
 import ellysmore.redditmeh.R;
 import ellysmore.redditmeh.api.events.ListingEvent;
 import ellysmore.redditmeh.api.request.FrontPageListingRequest;
-import ellysmore.redditmeh.ui.commons.BaseFragment;
-import ellysmore.redditmeh.ui.subreddit.adapters.ListingAdapter;
-import ellysmore.redditmeh.ui.subreddit.models.ListingDisplayInfo;
+import ellysmore.redditmeh.ui.commons.BaseFragmentWithSwipeRefreshListener;
+import ellysmore.redditmeh.ui.listing.subreddit.adapters.ListingAdapter;
+import ellysmore.redditmeh.ui.listing.subreddit.models.ListingDisplayInfo;
 
-public class FrontPageFragment extends BaseFragment {
-
-    @InjectView(R.id.list)
-    protected ListView mList;
+public class FrontPageFragment
+        extends BaseFragmentWithSwipeRefreshListener {
 
     @InjectView(R.id.progress_bar)
     protected ProgressBar mProgressBar;
@@ -32,7 +29,8 @@ public class FrontPageFragment extends BaseFragment {
     private ListingDisplayInfo mListingDisplayInfo;
 
     public static FrontPageFragment newInstance() {
-        FrontPageFragment fragment = new FrontPageFragment();
+        FrontPageFragment
+                fragment = new FrontPageFragment();
         return fragment;
     }
 
@@ -41,13 +39,30 @@ public class FrontPageFragment extends BaseFragment {
             Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.fragment_listing, container, false);
         ButterKnife.inject(this, mRootView);
-        mListingAdapter = new ListingAdapter();
-        mList.setAdapter(mListingAdapter);
-        getFrontPageListing();
+        setUpAdapter();
+        setUpSwipeRefreshLayout();
+        setUpListScrollListener();
+        fetchFrontPageListing();
         return mRootView;
     }
 
-    public void getFrontPageListing() {
+    @Override
+    public void onRefresh() {
+        super.onRefresh();
+        fetchFrontPageListing();
+    }
+
+    private void setUpSwipeRefreshLayout() {
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+        setUpSwipeRefreshColorScheme();
+    }
+
+    private void setUpAdapter() {
+        mListingAdapter = new ListingAdapter();
+        mList.setAdapter(mListingAdapter);
+    }
+
+    public void fetchFrontPageListing() {
         showLoading(true);
         FrontPageListingRequest request = new FrontPageListingRequest(Constants.LISTING_TYPE_HOT);
         getSpiceManager().execute(request, request);
@@ -67,6 +82,7 @@ public class FrontPageFragment extends BaseFragment {
     public void onEventMainThread(ListingEvent event) {
         mListingDisplayInfo = new ListingDisplayInfo(event.getResult());
         updateUI();
+        mSwipeRefreshLayout.setRefreshing(false);
         showLoading(false);
     }
 
