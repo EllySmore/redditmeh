@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 import ellysmore.redditmeh.R;
-import ellysmore.redditmeh.ui.commons.BaseFragment;
 import ellysmore.redditmeh.ui.navigation.adapters.NavigationListAdapter;
 import ellysmore.redditmeh.ui.navigation.models.NavItems;
 

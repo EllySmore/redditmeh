@@ -1,10 +1,9 @@
-package ellysmore.redditmeh.ui.subreddit;
+package ellysmore.redditmeh.ui.listing.subreddit;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import butterknife.ButterKnife;
@@ -12,18 +11,16 @@ import butterknife.InjectView;
 import ellysmore.redditmeh.R;
 import ellysmore.redditmeh.api.events.ListingEvent;
 import ellysmore.redditmeh.api.request.SubredditListingRequest;
-import ellysmore.redditmeh.ui.commons.BaseFragment;
-import ellysmore.redditmeh.ui.subreddit.adapters.ListingAdapter;
-import ellysmore.redditmeh.ui.subreddit.models.ListingDisplayInfo;
+import ellysmore.redditmeh.ui.commons.BaseFragmentWithSwipeRefreshListener;
+import ellysmore.redditmeh.ui.listing.subreddit.adapters.ListingAdapter;
+import ellysmore.redditmeh.ui.listing.subreddit.models.ListingDisplayInfo;
 
-public class SubredditFragment extends BaseFragment {
+public class SubredditFragment
+        extends BaseFragmentWithSwipeRefreshListener {
 
     private static final String TAG = SubredditFragment.class.getSimpleName();
 
     private static final String PARAM_SUBREDDIT_NAME = "PARAM_SUBREDDIT_NAME";
-
-    @InjectView(R.id.list)
-    protected ListView mList;
 
     @InjectView(R.id.progress_bar)
     protected ProgressBar mProgressBar;
@@ -37,7 +34,8 @@ public class SubredditFragment extends BaseFragment {
     private ListingDisplayInfo mListingDisplayInfo;
 
     public static SubredditFragment newInstance(String subredditName) {
-        SubredditFragment subredditFragment = new SubredditFragment();
+        SubredditFragment
+                subredditFragment = new SubredditFragment();
         Bundle bundle = new Bundle();
         bundle.putString(PARAM_SUBREDDIT_NAME, subredditName);
         subredditFragment.setArguments(bundle);
@@ -58,13 +56,30 @@ public class SubredditFragment extends BaseFragment {
             Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.fragment_listing, container, false);
         ButterKnife.inject(this, mRootView);
-        mListingAdapter = new ListingAdapter();
-        mList.setAdapter(mListingAdapter);
-        getSubredditListing();
+        setUpAdapter();
+        setUpSwipeRefreshLayout();
+        setUpListScrollListener();
+        fetchSubredditListing();
         return mRootView;
     }
 
-    private void getSubredditListing() {
+    @Override
+    public void onRefresh() {
+        super.onRefresh();
+        fetchSubredditListing();
+    }
+
+    private void setUpAdapter() {
+        mListingAdapter = new ListingAdapter();
+        mList.setAdapter(mListingAdapter);
+    }
+
+    private void setUpSwipeRefreshLayout() {
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+        setUpSwipeRefreshColorScheme();
+    }
+
+    private void fetchSubredditListing() {
         showLoading(true);
         SubredditListingRequest request = new SubredditListingRequest(mSubredditName, null);
         getSpiceManager().execute(request, request);
@@ -92,5 +107,6 @@ public class SubredditFragment extends BaseFragment {
             updateUI();
         }
         showLoading(false);
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 }

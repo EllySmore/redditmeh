@@ -10,7 +10,13 @@
     <color name="c3_2">#6991AC</color>
     <color name="c4_2">#C3D7DF</color>
     <color name="c5_2">#F5F5F5</color>
-    <color name="c6_2">#BFE1BF</color>
+    <color name="c6_2">#ff39b08c</color>
+
+    <color name="c1_3">#E45F56</color>
+    <color name="c2_3">#0DC9F7</color>
+    <color name="c3_3">#7F7F7F</color>
+    <color name="c4_3">#59C4C5</color>
+    <color name="c5_3">#FFC33C</color>
     <color name="c7">#DCDCDC</color>
 
 </resources>

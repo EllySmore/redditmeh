@@ -6,10 +6,10 @@ import android.support.v7.widget.Toolbar;
 
 import ellysmore.redditmeh.R;
 import ellysmore.redditmeh.ui.commons.BaseActivity;
-import ellysmore.redditmeh.ui.commons.BaseFragment;
-import ellysmore.redditmeh.ui.frontpage.FrontPageFragment;
+import ellysmore.redditmeh.ui.commons.BaseFragmentWithSwipeRefreshListener;
+import ellysmore.redditmeh.ui.listing.frontpage.FrontPageFragment;
+import ellysmore.redditmeh.ui.listing.subreddit.SubredditFragment;
 import ellysmore.redditmeh.ui.navigation.models.NavItems;
-import ellysmore.redditmeh.ui.subreddit.SubredditFragment;
 
 public class NavigationActivity extends BaseActivity implements
         NavigationDrawerFragment.NavigationSelectCallback {
@@ -47,25 +47,30 @@ public class NavigationActivity extends BaseActivity implements
 
     @Override
     public void onItemClick(NavItems navItems) {
-        BaseFragment fragment = null;
+        BaseFragmentWithSwipeRefreshListener fragment = null;
         switch (navItems) {
             case FRONT_PAGE:
                 fragment = FrontPageFragment.newInstance();
                 break;
             case AWW:
-                fragment = SubredditFragment.newInstance(getString(R.string.aww));
+                fragment = SubredditFragment
+                        .newInstance(getString(R.string.aww));
                 break;
             case FUNNY:
-                fragment = SubredditFragment.newInstance(getString(R.string.funny));
+                fragment = SubredditFragment
+                        .newInstance(getString(R.string.funny));
                 break;
             case PICS:
-                fragment = SubredditFragment.newInstance(getString(R.string.pics));
+                fragment = SubredditFragment
+                        .newInstance(getString(R.string.pics));
                 break;
             case PROGRAMMING:
-                fragment = SubredditFragment.newInstance(getString(R.string.programming));
+                fragment = SubredditFragment
+                        .newInstance(getString(R.string.programming));
                 break;
             case SHOWER_THOUGHTS:
-                fragment = SubredditFragment.newInstance(getString(R.string.shower_thoughts));
+                fragment = SubredditFragment
+                        .newInstance(getString(R.string.shower_thoughts));
                 break;
             default:
                 break;
