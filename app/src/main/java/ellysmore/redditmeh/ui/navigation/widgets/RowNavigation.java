@@ -2,6 +2,7 @@ package ellysmore.redditmeh.ui.navigation.widgets;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.widget.Checkable;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -11,7 +12,7 @@ import butterknife.InjectView;
 import ellysmore.redditmeh.R;
 import ellysmore.redditmeh.ui.navigation.models.NavItems;
 
-public class RowNavigationExpanded extends RelativeLayout {
+public class RowNavigation extends RelativeLayout implements Checkable {
 
     @InjectView(R.id.icon)
     protected ImageView mIcon;
@@ -21,17 +22,17 @@ public class RowNavigationExpanded extends RelativeLayout {
 
     private NavItems mNavItem;
 
-    public RowNavigationExpanded(Context context) {
+    public RowNavigation(Context context) {
         this(context, null);
     }
 
-    public RowNavigationExpanded(Context context, AttributeSet attrs) {
+    public RowNavigation(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public RowNavigationExpanded(Context context, AttributeSet attrs, int defStyleAttr) {
+    public RowNavigation(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        inflate(context, R.layout.row_navigation_expanded, this);
+        inflate(context, R.layout.row_navigation, this);
         ButterKnife.inject(this);
     }
 
@@ -40,5 +41,22 @@ public class RowNavigationExpanded extends RelativeLayout {
         mTitle.setText(getResources().getString(navItem.getTitleResId()));
     }
 
+    @Override
+    public boolean isChecked() {
+        return false;
+    }
 
+    @Override
+    public void setChecked(boolean checked) {
+        if (checked) {
+            setBackgroundColor(getResources().getColor(R.color.c1_2));
+        } else {
+            setBackgroundColor(getResources().getColor(R.color.c1_3));
+        }
+    }
+
+    @Override
+    public void toggle() {
+
+    }
 }
