@@ -39,4 +39,5 @@ dependencies {
     compile 'com.etsy.android.grid:library:1.0.5'
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'com.squareup.picasso:picasso:2.4.0'
+    compile 'com.github.pavlospt:circleview:1.2'
 }
