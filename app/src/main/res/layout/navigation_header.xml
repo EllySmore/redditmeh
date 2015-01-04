@@ -11,7 +11,8 @@
         android:layout_marginTop="20dp"
         app:fillColor="@android:color/transparent"
         app:fillRadius="1"
-        app:strokeColorValue="@color/c5_2"
+        app:strokeColorValue="@color/c1_2"
+        app:strokeWidthSize="5"
         app:titleColor="@color/c1_3"
         app:titleSize="14sp"
         app:titleText="Me" />
@@ -30,4 +31,5 @@
         android:textColor="@color/c5_2"
         android:textSize="@dimen/abc_text_size_title_material"
         android:textStyle="bold" />
+
 </merge>
