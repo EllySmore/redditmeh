@@ -1,9 +1,26 @@
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navigation_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/c1"
-    android:divider="@null"
-    android:dividerHeight="0dp"
-    tools:context=".ui.NavigationDrawerFragment" />
+    android:background="@color/c1_3"
+    android:orientation="vertical"
+    tools:context=".ui.NavigationDrawerFragment">
+
+    <include
+        layout="@layout/navigation_header"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal" />
+
+    <ListView
+        android:id="@+id/navigation_list"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/c1_3"
+        android:choiceMode="singleChoice"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:listSelector="@drawable/c1_3_listselector" />
+</LinearLayout>

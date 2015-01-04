@@ -16,6 +16,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import butterknife.ButterKnife;
+import butterknife.InjectView;
 import butterknife.OnItemClick;
 import ellysmore.redditmeh.R;
 import ellysmore.redditmeh.ui.navigation.adapters.NavigationListAdapter;
@@ -25,13 +26,20 @@ public class NavigationDrawerFragment extends Fragment {
 
     private static final String TAG = NavigationDrawerFragment.class.getSimpleName();
 
+    private static final String PARAM_SELECT_POSITION = "PARAM_SELECT_POSITION";
+
+    @InjectView(R.id.navigation_list)
+    protected ListView mListView;
+
     private ActionBarDrawerToggle mDrawerToggle;
 
-    private ListView mDrawerListView;
+    private View mRootView;
 
     private NavigationListAdapter mNavigationListAdapter;
 
     private NavigationSelectCallback mCallbacks;
+
+    private int mCurrentSelectedPosition = 0;
 
     @Override
     public void onAttach(Activity activity) {
@@ -40,23 +48,37 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            mCurrentSelectedPosition = savedInstanceState.getInt(PARAM_SELECT_POSITION);
+        }
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        mDrawerListView = (ListView) inflater.inflate(
+        mRootView = inflater.inflate(
                 R.layout.fragment_navigation_drawer, container, false);
-        ButterKnife.inject(this, mDrawerListView);
+        ButterKnife.inject(this, mRootView);
         mNavigationListAdapter = new NavigationListAdapter(setUpNavigationDrawer(), true);
-        mDrawerListView.setAdapter(mNavigationListAdapter);
+        mListView.setAdapter(mNavigationListAdapter);
+        mListView.setItemChecked(mCurrentSelectedPosition, true);
+        return mRootView;
+    }
 
-        return mDrawerListView;
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(PARAM_SELECT_POSITION, mCurrentSelectedPosition);
     }
 
     @OnItemClick(R.id.navigation_list)
     protected void onNavigationItemClicked(AdapterView<?> parent, View view, int position,
             long id) {
         Log.v(TAG, "I am clicked");
-        mCallbacks.onItemClick(mNavigationListAdapter.getItem(position));
 
+        selectItem(position);
     }
 
     public void setUp(DrawerLayout drawerLayout, Toolbar toolbar) {
@@ -94,7 +116,16 @@ public class NavigationDrawerFragment extends Fragment {
         return navItems;
     }
 
+
+    private void selectItem(int position) {
+        mCurrentSelectedPosition = position;
+        mListView.setItemChecked(position, true);
+        mCallbacks.onItemClick(mNavigationListAdapter.getItem(position));
+        mNavigationListAdapter.notifyDataSetInvalidated();
+    }
+
     public static interface NavigationSelectCallback {
+
         void onItemClick(NavItems navItems);
     }
 }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.github.pavlospt.CircleView
+        android:id="@+id/circle_image"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        app:fillColor="@android:color/transparent"
+        app:fillRadius="1"
+        app:strokeColorValue="@color/c5_2"
+        app:titleColor="@color/c1_3"
+        app:titleSize="14sp"
+        app:titleText="Me" />
+
+    <TextView
+        android:id="@+id/username"
+        style="@style/TextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/circle_image"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="16dp"
+        android:fontFamily="sans-serif-light"
+        android:text="Reddit User"
+        android:textColor="@color/c5_2"
+        android:textSize="@dimen/abc_text_size_title_material"
+        android:textStyle="bold" />
+</merge>

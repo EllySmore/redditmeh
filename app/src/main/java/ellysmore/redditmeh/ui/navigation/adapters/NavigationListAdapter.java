@@ -4,12 +4,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
 import ellysmore.redditmeh.R;
 import ellysmore.redditmeh.ui.navigation.models.NavItems;
-import ellysmore.redditmeh.ui.navigation.widgets.RowNavigationExpanded;
+import ellysmore.redditmeh.ui.navigation.widgets.RowNavigation;
 
 public class NavigationListAdapter extends BaseAdapter {
 
@@ -39,11 +40,11 @@ public class NavigationListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        RowNavigationExpanded rowView = (RowNavigationExpanded) convertView;
+        RowNavigation rowView = (RowNavigation) convertView;
         if (convertView == null) {
             LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-            rowView = (RowNavigationExpanded) layoutInflater
-                    .inflate(R.layout.row_navigation_expanded_impl, parent, false);
+            rowView = (RowNavigation) layoutInflater
+                    .inflate(R.layout.row_navigation_impl, parent, false);
         }
         rowView.updateUI(mItems.get(position));
         return rowView;
