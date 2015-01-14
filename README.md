@@ -5,6 +5,12 @@ redditmeh
 Android app that display reddit listings.
 
 WIP.
+Currently working on:
+- Pagination
+- Caching and Persisting data
+- StaggeredGridView for certain subreddits
+- Showing failed connection screen via croutons
+- Allowing user login
 
 <img src="http://i1314.photobucket.com/albums/t572/awula333/s2_zps4693c0bf.png" width="240px" height="400px" border="0" alt=" photo s2_zps4693c0bf.png"/>
 <img src="http://i1314.photobucket.com/albums/t572/awula333/s1_zps6da13cd3.png" width="240px" height="400px" border="0" alt=" photo s1_zps6da13cd3.png"/>
