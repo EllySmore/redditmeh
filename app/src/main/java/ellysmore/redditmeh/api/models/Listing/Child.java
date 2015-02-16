@@ -2,9 +2,6 @@ package ellysmore.redditmeh.api.models.Listing;
 
 import com.google.gson.annotations.Expose;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import ellysmore.redditmeh.api.models.BaseModel;
 
 public class Child extends BaseModel {

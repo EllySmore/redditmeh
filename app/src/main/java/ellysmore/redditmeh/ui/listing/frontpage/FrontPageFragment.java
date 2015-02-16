@@ -13,7 +13,6 @@ import ellysmore.redditmeh.R;
 import ellysmore.redditmeh.api.NetworkClient;
 import ellysmore.redditmeh.api.events.ListingEvent;
 import ellysmore.redditmeh.api.models.Listing.Listing;
-import ellysmore.redditmeh.api.request.FrontPageListingRequest;
 import ellysmore.redditmeh.ui.commons.BaseFragmentWithSwipeRefreshListener;
 import ellysmore.redditmeh.ui.listing.subreddit.adapters.ListingAdapter;
 import ellysmore.redditmeh.ui.listing.subreddit.models.ListingDisplayInfo;

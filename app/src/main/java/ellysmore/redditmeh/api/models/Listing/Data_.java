@@ -1,12 +1,9 @@
 package ellysmore.redditmeh.api.models.Listing;
 
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import org.json.JSONObject;
 
 import ellysmore.redditmeh.api.models.BaseModel;
 
