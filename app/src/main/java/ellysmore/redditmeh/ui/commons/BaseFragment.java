@@ -1,7 +1,5 @@
 package ellysmore.redditmeh.ui.commons;
 
-import com.octo.android.robospice.SpiceManager;
-
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -12,11 +10,8 @@ import android.view.ViewGroup;
 
 import de.greenrobot.event.EventBus;
 import de.greenrobot.event.EventBusException;
-import ellysmore.redditmeh.api.services.MyOkHttpSpiceService;
 
 public class BaseFragment extends Fragment {
-
-    protected SpiceManager spiceManager = new SpiceManager(MyOkHttpSpiceService.class);
 
     private String TAG = this.getClass().getSimpleName();
 
@@ -31,7 +26,6 @@ public class BaseFragment extends Fragment {
     public void onStart() {
         super.onStart();
         Log.v(TAG, "OnStart");
-        spiceManager.start(getActivity());
         try {
             EventBus.getDefault().register(this);
         } catch (EventBusException e) {
@@ -47,18 +41,12 @@ public class BaseFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        spiceManager.shouldStop();
         try {
             EventBus.getDefault().unregister(this);
         } catch (EventBusException e) {
 
         }
     }
-
-    protected SpiceManager getSpiceManager() {
-        return spiceManager;
-    }
-
 
     /**
      * Add fragment to backstack if backstackname is given.

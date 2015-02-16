@@ -10,11 +10,15 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import ellysmore.redditmeh.Constants;
 import ellysmore.redditmeh.R;
+import ellysmore.redditmeh.api.NetworkClient;
 import ellysmore.redditmeh.api.events.ListingEvent;
-import ellysmore.redditmeh.api.request.FrontPageListingRequest;
+import ellysmore.redditmeh.api.models.Listing.Listing;
 import ellysmore.redditmeh.ui.commons.BaseFragmentWithSwipeRefreshListener;
 import ellysmore.redditmeh.ui.listing.subreddit.adapters.ListingAdapter;
 import ellysmore.redditmeh.ui.listing.subreddit.models.ListingDisplayInfo;
+import rx.Observable;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
 
 public class FrontPageFragment
         extends BaseFragmentWithSwipeRefreshListener {
@@ -63,9 +67,28 @@ public class FrontPageFragment
     }
 
     public void fetchFrontPageListing() {
-        showLoading(true);
-        FrontPageListingRequest request = new FrontPageListingRequest(Constants.LISTING_TYPE_HOT);
-        getSpiceManager().execute(request, request);
+        Observable<Listing> observable = NetworkClient.getInstance()
+                .getRedditApiService()
+                .getFrontPageListing(Constants.LISTING_TYPE_HOT);
+        observable.observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Listing>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onNext(Listing subredditListing) {
+                        mListingDisplayInfo = new ListingDisplayInfo(subredditListing);
+                        mListingAdapter.setData(mListingDisplayInfo);
+                        mListingAdapter.notifyDataSetChanged();
+                        showLoading(false);
+                    }
+                });
     }
 
     private void showLoading(boolean isLoading) {

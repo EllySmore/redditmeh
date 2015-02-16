@@ -2,6 +2,9 @@ package ellysmore.redditmeh;
 
 public class Config {
 
-    public static final String END_POINT = "http://www.reddit.com";
+    private static final String END_POINT = "http://www.reddit.com";
 
+    public static String getEndPoint() {
+        return END_POINT;
+    }
 }
