@@ -1,22 +1,14 @@
 package ellysmore.redditmeh.api.request;
 
-import com.google.gson.reflect.TypeToken;
-
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 import com.octo.android.robospice.request.okhttp.OkHttpSpiceRequest;
-import com.squareup.okhttp.internal.http.Request;
-
-import org.apache.commons.io.IOUtils;
-import org.json.JSONObject;
 
 import android.util.Log;
 
 import java.io.InputStream;
-import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URI;
-import java.util.List;
 
 import de.greenrobot.event.EventBus;
 import ellysmore.redditmeh.Constants;
@@ -51,12 +43,14 @@ public class SubredditListingRequest extends OkHttpSpiceRequest<Listing> impleme
 
     @Override
     public Listing loadDataFromNetwork() throws Exception {
-        URI uri = RequestHelper.buildSubredditURI(ROUTE, mSubredditName, mListingType);
-        HttpURLConnection connection = getOkHttpClient().open(uri.toURL());
-        InputStream in = null;
-        in = connection.getInputStream();
-        Listing listing = Listing.buildFromJson(in, Listing.class, true);
-        return listing;
+        //TODO: Delete request, commented out, okHttpClient does not have open func
+//        URI uri = RequestHelper.buildSubredditURI(ROUTE, mSubredditName, mListingType);
+//        HttpURLConnection connection = getOkHttpClient().open(uri.toURL());
+//        InputStream in = null;
+//        in = connection.getInputStream();
+//        Listing listing = Listing.buildFromJson(in, Listing.class, true);
+//        return listing;
+        return null;
     }
 
     @Override

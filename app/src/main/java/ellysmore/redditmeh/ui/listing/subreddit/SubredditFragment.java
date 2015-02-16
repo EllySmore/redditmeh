@@ -8,12 +8,16 @@ import android.widget.ProgressBar;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import ellysmore.redditmeh.Constants;
 import ellysmore.redditmeh.R;
-import ellysmore.redditmeh.api.events.ListingEvent;
-import ellysmore.redditmeh.api.request.SubredditListingRequest;
+import ellysmore.redditmeh.api.NetworkClient;
+import ellysmore.redditmeh.api.models.Listing.Listing;
 import ellysmore.redditmeh.ui.commons.BaseFragmentWithSwipeRefreshListener;
 import ellysmore.redditmeh.ui.listing.subreddit.adapters.ListingAdapter;
 import ellysmore.redditmeh.ui.listing.subreddit.models.ListingDisplayInfo;
+import rx.Observable;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
 
 public class SubredditFragment
         extends BaseFragmentWithSwipeRefreshListener {
@@ -80,9 +84,28 @@ public class SubredditFragment
     }
 
     private void fetchSubredditListing() {
-        showLoading(true);
-        SubredditListingRequest request = new SubredditListingRequest(mSubredditName, null);
-        getSpiceManager().execute(request, request);
+        Observable<Listing> observable = NetworkClient.getInstance()
+                .getRedditApiService()
+                .getSubRedditListing(mSubredditName, Constants.LISTING_TYPE_HOT);
+        observable.observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Listing>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onNext(Listing subredditListing) {
+                        mListingDisplayInfo = new ListingDisplayInfo(subredditListing);
+                        mListingAdapter.setData(mListingDisplayInfo);
+                        mListingAdapter.notifyDataSetChanged();
+                        showLoading(false);
+                    }
+                });
     }
 
     private void showLoading(boolean isLoading) {
@@ -100,13 +123,4 @@ public class SubredditFragment
         mListingAdapter.notifyDataSetChanged();
     }
 
-    @SuppressWarnings("UnusedDeclaration")
-    public void onEventMainThread(ListingEvent event) {
-        if (event.isSuccess() && event.getSubredditName().equals(mSubredditName)) {
-            mListingDisplayInfo = new ListingDisplayInfo(event.getResult());
-            updateUI();
-        }
-        showLoading(false);
-        mSwipeRefreshLayout.setRefreshing(false);
-    }
 }

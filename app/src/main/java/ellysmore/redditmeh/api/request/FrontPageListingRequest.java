@@ -3,7 +3,7 @@ package ellysmore.redditmeh.api.request;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 import com.octo.android.robospice.request.okhttp.OkHttpSpiceRequest;
-
+import com.squareup.okhttp.ConnectionPool;
 
 import android.util.Log;
 
@@ -39,13 +39,15 @@ public class FrontPageListingRequest extends OkHttpSpiceRequest<Listing> impleme
 
     @Override
     public Listing loadDataFromNetwork() throws Exception {
-        URI uri = RequestHelper.buildFrontPageURI(ROUTE, mListingType);
-        Log.i(TAG, "url: " + uri);
-        HttpURLConnection connection = getOkHttpClient().open(uri.toURL());
-        InputStream in = null;
-        in = connection.getInputStream();
-        Listing listing = Listing.buildFromJson(in, Listing.class, true);
-        return listing;
+        //TODO: Delete request, commented out, okHttpClient does not have open func
+//        URI uri = RequestHelper.buildFrontPageURI(ROUTE, mListingType);
+//        Log.i(TAG, "url: " + uri);
+//        ConnectionPool connection = getOkHttpClient().getConnectionPool();
+//        connection.
+//        InputStream in = null;
+//        in = connection.getInputStream();
+//        Listing listing = Listing.buildFromJson(in, Listing.class, true);
+        return null;
     }
 
     @Override
