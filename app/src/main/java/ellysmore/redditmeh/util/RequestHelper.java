@@ -13,7 +13,7 @@ import ellysmore.redditmeh.api.request.SubredditListingRequest;
 public class RequestHelper {
 
     public static URI buildURI(String route) throws URISyntaxException {
-        Uri.Builder uriBuilder = Uri.parse(Config.END_POINT + route).buildUpon();
+        Uri.Builder uriBuilder = Uri.parse(Config.getEndPoint() + route).buildUpon();
         URI uri = new URI(uriBuilder.build().toString());
         Log.d("RequestHelperUtil", "Url: " + uriBuilder.toString());
         return uri;
@@ -22,7 +22,7 @@ public class RequestHelper {
     public static URI buildSubredditURI(String route, String subredditName, String listingType) throws URISyntaxException {
         route = route.replace(SubredditListingRequest.SUBREDDIT_NAME, subredditName);
         route = route.replace(SubredditListingRequest.LISTING_TYPE, listingType);
-        Uri.Builder uriBuilder = Uri.parse(Config.END_POINT + route).buildUpon();
+        Uri.Builder uriBuilder = Uri.parse(Config.getEndPoint() + route).buildUpon();
         URI uri = new URI(uriBuilder.build().toString());
         Log.d("RequestHelperUtil", "Url: " + uriBuilder.toString());
         return uri;
@@ -30,7 +30,7 @@ public class RequestHelper {
 
     public static URI buildFrontPageURI(String route, String listingType) throws URISyntaxException {
         route = route.replace(FrontPageListingRequest.LISTING_TYPE, listingType);
-        Uri.Builder uriBuilder = Uri.parse(Config.END_POINT + route).buildUpon();
+        Uri.Builder uriBuilder = Uri.parse(Config.getEndPoint() + route).buildUpon();
         URI uri = new URI(uriBuilder.build().toString());
         Log.d("RequestHelperUtil", "Url: " + uriBuilder.toString());
         return uri;
