@@ -87,6 +87,7 @@ public class FrontPageFragment
                         mListingAdapter.setData(mListingDisplayInfo);
                         mListingAdapter.notifyDataSetChanged();
                         showLoading(false);
+                        mSwipeRefreshLayout.setRefreshing(false);
                     }
                 });
     }
@@ -99,19 +100,6 @@ public class FrontPageFragment
             mList.setVisibility(View.VISIBLE);
             mProgressBar.setVisibility(View.GONE);
         }
-    }
-
-    @SuppressWarnings("UnusedDeclaration")
-    public void onEventMainThread(ListingEvent event) {
-        mListingDisplayInfo = new ListingDisplayInfo(event.getResult());
-        updateUI();
-        mSwipeRefreshLayout.setRefreshing(false);
-        showLoading(false);
-    }
-
-    private void updateUI() {
-        mListingAdapter.setData(mListingDisplayInfo);
-        mListingAdapter.notifyDataSetChanged();
     }
 
 }

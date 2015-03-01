@@ -104,6 +104,7 @@ public class SubredditFragment
                         mListingAdapter.setData(mListingDisplayInfo);
                         mListingAdapter.notifyDataSetChanged();
                         showLoading(false);
+                        mSwipeRefreshLayout.setRefreshing(false);
                     }
                 });
     }
@@ -118,9 +119,5 @@ public class SubredditFragment
         }
     }
 
-    private void updateUI() {
-        mListingAdapter.setData(mListingDisplayInfo);
-        mListingAdapter.notifyDataSetChanged();
-    }
 
 }
