@@ -303,9 +303,9 @@ public class Data_ extends BaseModel {
         Boolean isEdited = false;
         if (edited.isJsonPrimitive()) {
             JsonPrimitive object = edited.getAsJsonPrimitive();
-            if (object.isNumber()){
+            if (object.isNumber()) {
                 long value = object.getAsLong();
-            } else if (object.isBoolean()){
+            } else if (object.isBoolean()) {
                 isEdited = object.getAsBoolean();
             }
         }

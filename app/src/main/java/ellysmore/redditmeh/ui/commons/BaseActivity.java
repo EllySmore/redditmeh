@@ -39,6 +39,7 @@ public class BaseActivity extends ActionBarActivity {
         Log.v(TAG, "onStop");
         super.onStop();
     }
+
     public void replaceFragment(Fragment fragment, String backStackName, int containerId) {
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(containerId, fragment);
