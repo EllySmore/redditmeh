@@ -1,31 +1,19 @@
 package ellysmore.redditmeh.api.models.Listing;
 
-import com.google.gson.annotations.Expose;
-
 import ellysmore.redditmeh.api.models.BaseModel;
 
 public class Media extends BaseModel {
 
-    @Expose
     private String type;
 
-    @Expose
     private Oembed oembed;
 
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public Oembed getOembed() {
         return oembed;
-    }
-
-    public void setOembed(Oembed oembed) {
-        this.oembed = oembed;
     }
 
     @Override

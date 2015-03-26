@@ -1,147 +1,75 @@
 package ellysmore.redditmeh.api.models.Listing;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 import ellysmore.redditmeh.api.models.BaseModel;
 
 public class Oembed extends BaseModel {
 
-    @SerializedName("provider_url")
-    @Expose
-    private String providerUrl;
+    private String provider_url;
 
-    @Expose
     private String description;
 
-    @Expose
     private String title;
 
-    @SerializedName("thumbnail_width")
-    @Expose
-    private int thumbnailWidth;
+    private int thumbnail_width;
 
-    @Expose
     private int height;
 
-    @Expose
     private int width;
 
-    @Expose
     private String html;
 
-    @Expose
     private String version;
 
-    @SerializedName("provider_name")
-    @Expose
-    private String providerName;
+    private String provider_name;
 
-    @SerializedName("thumbnail_url")
-    @Expose
-    private String thumbnailUrl;
+    private String thumbnail_url;
 
-    @Expose
     private String type;
 
-    @SerializedName("thumbnail_height")
-    @Expose
-    private int thumbnailHeight;
+    private int thumbnail_height;
 
     public String getProviderUrl() {
-        return providerUrl;
-    }
-
-    public void setProviderUrl(String providerUrl) {
-        this.providerUrl = providerUrl;
+        return provider_url;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public int getThumbnailWidth() {
-        return thumbnailWidth;
-    }
-
-    public void setThumbnailWidth(int thumbnailWidth) {
-        this.thumbnailWidth = thumbnailWidth;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
+        return thumbnail_width;
     }
 
     public int getWidth() {
         return width;
     }
 
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
     public String getHtml() {
         return html;
-    }
-
-    public void setHtml(String html) {
-        this.html = html;
     }
 
     public String getVersion() {
         return version;
     }
 
-    public void setVersion(String version) {
-        this.version = version;
-    }
-
     public String getProviderName() {
-        return providerName;
-    }
-
-    public void setProviderName(String providerName) {
-        this.providerName = providerName;
+        return provider_name;
     }
 
     public String getThumbnailUrl() {
-        return thumbnailUrl;
-    }
-
-    public void setThumbnailUrl(String thumbnailUrl) {
-        this.thumbnailUrl = thumbnailUrl;
+        return thumbnail_url;
     }
 
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public int getThumbnailHeight() {
-        return thumbnailHeight;
-    }
-
-    public void setThumbnailHeight(int thumbnailHeight) {
-        this.thumbnailHeight = thumbnailHeight;
+        return thumbnail_height;
     }
 
     @Override
@@ -158,10 +86,10 @@ public class Oembed extends BaseModel {
         if (height != oembed.height) {
             return false;
         }
-        if (thumbnailHeight != oembed.thumbnailHeight) {
+        if (thumbnail_height != oembed.thumbnail_height) {
             return false;
         }
-        if (thumbnailWidth != oembed.thumbnailWidth) {
+        if (thumbnail_width != oembed.thumbnail_width) {
             return false;
         }
         if (width != oembed.width) {
@@ -174,16 +102,16 @@ public class Oembed extends BaseModel {
         if (html != null ? !html.equals(oembed.html) : oembed.html != null) {
             return false;
         }
-        if (providerName != null ? !providerName.equals(oembed.providerName)
-                : oembed.providerName != null) {
+        if (provider_name != null ? !provider_name.equals(oembed.provider_name)
+                : oembed.provider_name != null) {
             return false;
         }
-        if (providerUrl != null ? !providerUrl.equals(oembed.providerUrl)
-                : oembed.providerUrl != null) {
+        if (provider_url != null ? !provider_url.equals(oembed.provider_url)
+                : oembed.provider_url != null) {
             return false;
         }
-        if (thumbnailUrl != null ? !thumbnailUrl.equals(oembed.thumbnailUrl)
-                : oembed.thumbnailUrl != null) {
+        if (thumbnail_url != null ? !thumbnail_url.equals(oembed.thumbnail_url)
+                : oembed.thumbnail_url != null) {
             return false;
         }
         if (title != null ? !title.equals(oembed.title) : oembed.title != null) {
@@ -201,36 +129,36 @@ public class Oembed extends BaseModel {
 
     @Override
     public int hashCode() {
-        int result = providerUrl != null ? providerUrl.hashCode() : 0;
+        int result = provider_url != null ? provider_url.hashCode() : 0;
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + thumbnailWidth;
+        result = 31 * result + thumbnail_width;
         result = 31 * result + height;
         result = 31 * result + width;
         result = 31 * result + (html != null ? html.hashCode() : 0);
         result = 31 * result + (version != null ? version.hashCode() : 0);
-        result = 31 * result + (providerName != null ? providerName.hashCode() : 0);
-        result = 31 * result + (thumbnailUrl != null ? thumbnailUrl.hashCode() : 0);
+        result = 31 * result + (provider_name != null ? provider_name.hashCode() : 0);
+        result = 31 * result + (thumbnail_url != null ? thumbnail_url.hashCode() : 0);
         result = 31 * result + (type != null ? type.hashCode() : 0);
-        result = 31 * result + thumbnailHeight;
+        result = 31 * result + thumbnail_height;
         return result;
     }
 
     @Override
     public String toString() {
         return "Oembed{" +
-                "providerUrl='" + providerUrl + '\'' +
+                "provider_url='" + provider_url + '\'' +
                 ", description='" + description + '\'' +
                 ", title='" + title + '\'' +
-                ", thumbnailWidth=" + thumbnailWidth +
+                ", thumbnail_width=" + thumbnail_width +
                 ", height=" + height +
                 ", width=" + width +
                 ", html='" + html + '\'' +
                 ", version='" + version + '\'' +
-                ", providerName='" + providerName + '\'' +
-                ", thumbnailUrl='" + thumbnailUrl + '\'' +
+                ", provider_name='" + provider_name + '\'' +
+                ", thumbnail_url='" + thumbnail_url + '\'' +
                 ", type='" + type + '\'' +
-                ", thumbnailHeight=" + thumbnailHeight +
+                ", thumbnail_height=" + thumbnail_height +
                 '}';
     }
 }

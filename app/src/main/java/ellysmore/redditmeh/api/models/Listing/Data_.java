@@ -2,301 +2,165 @@ package ellysmore.redditmeh.api.models.Listing;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 
 import ellysmore.redditmeh.api.models.BaseModel;
 
 public class Data_ extends BaseModel {
 
-    @Expose
     private String domain;
 
-    @Expose
     private String bannedBy;
 
-    @SerializedName("media_embed")
-    @Expose
-    private MediaEmbed mediaEmbed;
+    private MediaEmbed media_embed;
 
-    @Expose
     private String subreddit;
 
-    @SerializedName("selftext_html")
-    @Expose
-    private String selftextHtml;
+    private String selftext_html;
 
-    @Expose
     private String selftext;
 
-    @SerializedName("secure_media")
-    @Expose
-    private SecureMedia secureMedia;
+    private Media secure_media;
 
+    private MediaEmbed secure_media_embed;
 
-    @SerializedName("secure_media_embed")
-    @Expose
-    private SecureMediaEmbed secureMediaEmbed;
+    private String link_flair_text;
 
-    @SerializedName("link_flair_text")
-    @Expose
-    private String linkFlairText;
-
-    @Expose
     private String id;
 
-    @Expose
     private int gilded;
 
-    @Expose
     private boolean clicked;
 
-    @Expose
     private String author;
 
-    @Expose
     private Media media;
 
-    @Expose
     private int score;
 
-    @SerializedName("approved_by")
-    @Expose
-    private String approvedBy;
+    private String approved_by;
 
-    @SerializedName("over_18")
-    @Expose
-    private boolean over18;
+    private boolean over_18;
 
-    @Expose
     private boolean hidden;
 
-    @Expose
     private String thumbnail;
 
-    @SerializedName("subreddit_id")
-    @Expose
-    private String subredditId;
+    private String subreddit_id;
 
-    @Expose
     private JsonElement edited;
 
-    @SerializedName("link_flair_css_class")
-    @Expose
-    private String linkFlairCssClass;
+    private String link_flair_css_class;
 
-    @SerializedName("author_flair_css_class")
-    @Expose
-    private String authorFlairCssClass;
+    private String author_flair_css_class;
 
-    @Expose
     private int downs;
 
-    @Expose
     private boolean saved;
 
-    @SerializedName("is_self")
-    @Expose
-    private boolean isSelf;
+    private boolean is_self;
 
-    @Expose
     private String name;
 
-    @Expose
     private String permalink;
 
-    @Expose
     private boolean stickied;
 
-    @Expose
     private float created;
 
-    @Expose
     private String url;
 
-    @SerializedName("author_flair_text")
-    @Expose
-    private String authorFlairText;
+    private String author_flair_text;
 
-    @Expose
     private String title;
 
-    @SerializedName("created_utc")
-    @Expose
-    private float createdUtc;
+    private float created_utc;
 
-    @Expose
     private int ups;
 
-    @SerializedName("num_comments")
-    @Expose
-    private int numComments;
+    private int num_comments;
 
-    @Expose
     private boolean visited;
 
-    @SerializedName("num_reports")
-    @Expose
-    private int numReports;
+    private int num_reports;
 
     public String getDomain() {
         return domain;
-    }
-
-    public void setDomain(String domain) {
-        this.domain = domain;
     }
 
     public String getBannedBy() {
         return bannedBy;
     }
 
-    public void setBannedBy(String bannedBy) {
-        this.bannedBy = bannedBy;
-    }
-
     public MediaEmbed getMediaEmbed() {
-        return mediaEmbed;
-    }
-
-    public void setMediaEmbed(MediaEmbed mediaEmbed) {
-        this.mediaEmbed = mediaEmbed;
+        return media_embed;
     }
 
     public String getSubreddit() {
         return subreddit;
     }
 
-    public void setSubreddit(String subreddit) {
-        this.subreddit = subreddit;
-    }
-
     public String getSelftextHtml() {
-        return selftextHtml;
-    }
-
-    public void setSelftextHtml(String selftextHtml) {
-        this.selftextHtml = selftextHtml;
+        return selftext_html;
     }
 
     public String getSelftext() {
         return selftext;
     }
 
-    public void setSelftext(String selftext) {
-        this.selftext = selftext;
+    public Media getSecureMedia() {
+        return secure_media;
     }
 
-    public SecureMedia getSecureMedia() {
-        return secureMedia;
-    }
-
-    public void setSecureMedia(SecureMedia secureMedia) {
-        this.secureMedia = secureMedia;
-    }
-
-    public SecureMediaEmbed getSecureMediaEmbed() {
-        return secureMediaEmbed;
-    }
-
-    public void setSecureMediaEmbed(SecureMediaEmbed secureMediaEmbed) {
-        this.secureMediaEmbed = secureMediaEmbed;
+    public MediaEmbed getSecureMediaEmbed() {
+        return secure_media_embed;
     }
 
     public String getLinkFlairText() {
-        return linkFlairText;
-    }
-
-    public void setLinkFlairText(String linkFlairText) {
-        this.linkFlairText = linkFlairText;
+        return link_flair_text;
     }
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public int getGilded() {
         return gilded;
-    }
-
-    public void setGilded(int gilded) {
-        this.gilded = gilded;
     }
 
     public boolean isClicked() {
         return clicked;
     }
 
-    public void setClicked(boolean clicked) {
-        this.clicked = clicked;
-    }
-
     public String getAuthor() {
         return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
     }
 
     public Media getMedia() {
         return media;
     }
 
-    public void setMedia(Media media) {
-        this.media = media;
-    }
-
     public int getScore() {
         return score;
     }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
-
     public String getApprovedBy() {
-        return approvedBy;
-    }
-
-    public void setApprovedBy(String approvedBy) {
-        this.approvedBy = approvedBy;
+        return approved_by;
     }
 
     public boolean isOver18() {
-        return over18;
-    }
-
-    public void setOver18(boolean over18) {
-        this.over18 = over18;
+        return over_18;
     }
 
     public boolean isHidden() {
         return hidden;
     }
 
-    public void setHidden(boolean hidden) {
-        this.hidden = hidden;
-    }
-
     public String getThumbnail() {
         return thumbnail;
     }
 
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
-    }
-
     public String getSubredditId() {
-        return subredditId;
-    }
-
-    public void setSubredditId(String subredditId) {
-        this.subredditId = subredditId;
+        return subreddit_id;
     }
 
     public Boolean getEdited() {
@@ -312,144 +176,72 @@ public class Data_ extends BaseModel {
         return isEdited;
     }
 
-    public void setEdited(JsonElement edited) {
-        this.edited = edited;
-    }
-
     public String getLinkFlairCssClass() {
-        return linkFlairCssClass;
-    }
-
-    public void setLinkFlairCssClass(String linkFlairCssClass) {
-        this.linkFlairCssClass = linkFlairCssClass;
+        return link_flair_css_class;
     }
 
     public String getAuthorFlairCssClass() {
-        return authorFlairCssClass;
-    }
-
-    public void setAuthorFlairCssClass(String authorFlairCssClass) {
-        this.authorFlairCssClass = authorFlairCssClass;
+        return author_flair_css_class;
     }
 
     public int getDowns() {
         return downs;
     }
 
-    public void setDowns(int downs) {
-        this.downs = downs;
-    }
-
     public boolean isSaved() {
         return saved;
     }
 
-    public void setSaved(boolean saved) {
-        this.saved = saved;
-    }
-
     public boolean isSelf() {
-        return isSelf;
-    }
-
-    public void setSelf(boolean isSelf) {
-        this.isSelf = isSelf;
+        return is_self;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getPermalink() {
         return permalink;
-    }
-
-    public void setPermalink(String permalink) {
-        this.permalink = permalink;
     }
 
     public boolean isStickied() {
         return stickied;
     }
 
-    public void setStickied(boolean stickied) {
-        this.stickied = stickied;
-    }
-
     public float getCreated() {
         return created;
-    }
-
-    public void setCreated(float created) {
-        this.created = created;
     }
 
     public String getUrl() {
         return url;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     public String getAuthorFlairText() {
-        return authorFlairText;
-    }
-
-    public void setAuthorFlairText(String authorFlairText) {
-        this.authorFlairText = authorFlairText;
+        return author_flair_text;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public float getCreatedUtc() {
-        return createdUtc;
-    }
-
-    public void setCreatedUtc(float createdUtc) {
-        this.createdUtc = createdUtc;
+        return created_utc;
     }
 
     public int getUps() {
         return ups;
     }
 
-    public void setUps(int ups) {
-        this.ups = ups;
-    }
-
     public int getNumComments() {
-        return numComments;
-    }
-
-    public void setNumComments(int numComments) {
-        this.numComments = numComments;
+        return num_comments;
     }
 
     public boolean isVisited() {
         return visited;
     }
 
-    public void setVisited(boolean visited) {
-        this.visited = visited;
-    }
-
     public int getNumReports() {
-        return numReports;
-    }
-
-    public void setNumReports(int numReports) {
-        this.numReports = numReports;
+        return num_reports;
     }
 
     @Override
@@ -469,7 +261,7 @@ public class Data_ extends BaseModel {
         if (Float.compare(data_.created, created) != 0) {
             return false;
         }
-        if (Float.compare(data_.createdUtc, createdUtc) != 0) {
+        if (Float.compare(data_.created_utc, created_utc) != 0) {
             return false;
         }
         if (downs != data_.downs) {
@@ -484,16 +276,16 @@ public class Data_ extends BaseModel {
         if (hidden != data_.hidden) {
             return false;
         }
-        if (isSelf != data_.isSelf) {
+        if (is_self != data_.is_self) {
             return false;
         }
-        if (numComments != data_.numComments) {
+        if (num_comments != data_.num_comments) {
             return false;
         }
-        if (numReports != data_.numReports) {
+        if (num_reports != data_.num_reports) {
             return false;
         }
-        if (over18 != data_.over18) {
+        if (over_18 != data_.over_18) {
             return false;
         }
         if (saved != data_.saved) {
@@ -511,18 +303,20 @@ public class Data_ extends BaseModel {
         if (visited != data_.visited) {
             return false;
         }
-        if (approvedBy != null ? !approvedBy.equals(data_.approvedBy) : data_.approvedBy != null) {
+        if (approved_by != null ? !approved_by.equals(data_.approved_by)
+                : data_.approved_by != null) {
             return false;
         }
         if (author != null ? !author.equals(data_.author) : data_.author != null) {
             return false;
         }
-        if (authorFlairCssClass != null ? !authorFlairCssClass.equals(data_.authorFlairCssClass)
-                : data_.authorFlairCssClass != null) {
+        if (author_flair_css_class != null ? !author_flair_css_class
+                .equals(data_.author_flair_css_class)
+                : data_.author_flair_css_class != null) {
             return false;
         }
-        if (authorFlairText != null ? !authorFlairText.equals(data_.authorFlairText)
-                : data_.authorFlairText != null) {
+        if (author_flair_text != null ? !author_flair_text.equals(data_.author_flair_text)
+                : data_.author_flair_text != null) {
             return false;
         }
         if (bannedBy != null ? !bannedBy.equals(data_.bannedBy) : data_.bannedBy != null) {
@@ -534,18 +328,19 @@ public class Data_ extends BaseModel {
         if (id != null ? !id.equals(data_.id) : data_.id != null) {
             return false;
         }
-        if (linkFlairCssClass != null ? !linkFlairCssClass.equals(data_.linkFlairCssClass)
-                : data_.linkFlairCssClass != null) {
+        if (link_flair_css_class != null ? !link_flair_css_class.equals(data_.link_flair_css_class)
+                : data_.link_flair_css_class != null) {
             return false;
         }
-        if (linkFlairText != null ? !linkFlairText.equals(data_.linkFlairText)
-                : data_.linkFlairText != null) {
+        if (link_flair_text != null ? !link_flair_text.equals(data_.link_flair_text)
+                : data_.link_flair_text != null) {
             return false;
         }
         if (media != null ? !media.equals(data_.media) : data_.media != null) {
             return false;
         }
-        if (mediaEmbed != null ? !mediaEmbed.equals(data_.mediaEmbed) : data_.mediaEmbed != null) {
+        if (media_embed != null ? !media_embed.equals(data_.media_embed)
+                : data_.media_embed != null) {
             return false;
         }
         if (name != null ? !name.equals(data_.name) : data_.name != null) {
@@ -554,26 +349,26 @@ public class Data_ extends BaseModel {
         if (permalink != null ? !permalink.equals(data_.permalink) : data_.permalink != null) {
             return false;
         }
-        if (secureMedia != null ? !secureMedia.equals(data_.secureMedia)
-                : data_.secureMedia != null) {
+        if (secure_media != null ? !secure_media.equals(data_.secure_media)
+                : data_.secure_media != null) {
             return false;
         }
-        if (secureMediaEmbed != null ? !secureMediaEmbed.equals(data_.secureMediaEmbed)
-                : data_.secureMediaEmbed != null) {
+        if (secure_media_embed != null ? !secure_media_embed.equals(data_.secure_media_embed)
+                : data_.secure_media_embed != null) {
             return false;
         }
         if (selftext != null ? !selftext.equals(data_.selftext) : data_.selftext != null) {
             return false;
         }
-        if (selftextHtml != null ? !selftextHtml.equals(data_.selftextHtml)
-                : data_.selftextHtml != null) {
+        if (selftext_html != null ? !selftext_html.equals(data_.selftext_html)
+                : data_.selftext_html != null) {
             return false;
         }
         if (subreddit != null ? !subreddit.equals(data_.subreddit) : data_.subreddit != null) {
             return false;
         }
-        if (subredditId != null ? !subredditId.equals(data_.subredditId)
-                : data_.subredditId != null) {
+        if (subreddit_id != null ? !subreddit_id.equals(data_.subreddit_id)
+                : data_.subreddit_id != null) {
             return false;
         }
         if (thumbnail != null ? !thumbnail.equals(data_.thumbnail) : data_.thumbnail != null) {
@@ -593,42 +388,43 @@ public class Data_ extends BaseModel {
     public int hashCode() {
         int result = domain != null ? domain.hashCode() : 0;
         result = 31 * result + (bannedBy != null ? bannedBy.hashCode() : 0);
-        result = 31 * result + (mediaEmbed != null ? mediaEmbed.hashCode() : 0);
+        result = 31 * result + (media_embed != null ? media_embed.hashCode() : 0);
         result = 31 * result + (subreddit != null ? subreddit.hashCode() : 0);
-        result = 31 * result + (selftextHtml != null ? selftextHtml.hashCode() : 0);
+        result = 31 * result + (selftext_html != null ? selftext_html.hashCode() : 0);
         result = 31 * result + (selftext != null ? selftext.hashCode() : 0);
-        result = 31 * result + (secureMedia != null ? secureMedia.hashCode() : 0);
-        result = 31 * result + (secureMediaEmbed != null ? secureMediaEmbed.hashCode() : 0);
-        result = 31 * result + (linkFlairText != null ? linkFlairText.hashCode() : 0);
+        result = 31 * result + (secure_media != null ? secure_media.hashCode() : 0);
+        result = 31 * result + (secure_media_embed != null ? secure_media_embed.hashCode() : 0);
+        result = 31 * result + (link_flair_text != null ? link_flair_text.hashCode() : 0);
         result = 31 * result + (id != null ? id.hashCode() : 0);
         result = 31 * result + gilded;
         result = 31 * result + (clicked ? 1 : 0);
         result = 31 * result + (author != null ? author.hashCode() : 0);
         result = 31 * result + (media != null ? media.hashCode() : 0);
         result = 31 * result + score;
-        result = 31 * result + (approvedBy != null ? approvedBy.hashCode() : 0);
-        result = 31 * result + (over18 ? 1 : 0);
+        result = 31 * result + (approved_by != null ? approved_by.hashCode() : 0);
+        result = 31 * result + (over_18 ? 1 : 0);
         result = 31 * result + (hidden ? 1 : 0);
         result = 31 * result + (thumbnail != null ? thumbnail.hashCode() : 0);
-        result = 31 * result + (subredditId != null ? subredditId.hashCode() : 0);
+        result = 31 * result + (subreddit_id != null ? subreddit_id.hashCode() : 0);
         result = 31 * result + (edited != null ? edited.hashCode() : 0);
-        result = 31 * result + (linkFlairCssClass != null ? linkFlairCssClass.hashCode() : 0);
-        result = 31 * result + (authorFlairCssClass != null ? authorFlairCssClass.hashCode() : 0);
+        result = 31 * result + (link_flair_css_class != null ? link_flair_css_class.hashCode() : 0);
+        result = 31 * result + (author_flair_css_class != null ? author_flair_css_class.hashCode()
+                : 0);
         result = 31 * result + downs;
         result = 31 * result + (saved ? 1 : 0);
-        result = 31 * result + (isSelf ? 1 : 0);
+        result = 31 * result + (is_self ? 1 : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (permalink != null ? permalink.hashCode() : 0);
         result = 31 * result + (stickied ? 1 : 0);
         result = 31 * result + (created != +0.0f ? Float.floatToIntBits(created) : 0);
         result = 31 * result + (url != null ? url.hashCode() : 0);
-        result = 31 * result + (authorFlairText != null ? authorFlairText.hashCode() : 0);
+        result = 31 * result + (author_flair_text != null ? author_flair_text.hashCode() : 0);
         result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (createdUtc != +0.0f ? Float.floatToIntBits(createdUtc) : 0);
+        result = 31 * result + (created_utc != +0.0f ? Float.floatToIntBits(created_utc) : 0);
         result = 31 * result + ups;
-        result = 31 * result + numComments;
+        result = 31 * result + num_comments;
         result = 31 * result + (visited ? 1 : 0);
-        result = 31 * result + numReports;
+        result = 31 * result + num_reports;
         return result;
     }
 
@@ -637,42 +433,42 @@ public class Data_ extends BaseModel {
         return "Data_{" +
                 "domain='" + domain + '\'' +
                 ", bannedBy='" + bannedBy + '\'' +
-                ", mediaEmbed=" + mediaEmbed +
+                ", media_embed=" + media_embed +
                 ", subreddit='" + subreddit + '\'' +
-                ", selftextHtml='" + selftextHtml + '\'' +
+                ", selftext_html='" + selftext_html + '\'' +
                 ", selftext='" + selftext + '\'' +
-                ", secureMedia=" + secureMedia +
-                ", secureMediaEmbed=" + secureMediaEmbed +
-                ", linkFlairText='" + linkFlairText + '\'' +
+                ", secure_media=" + secure_media +
+                ", secure_media_embed=" + secure_media_embed +
+                ", link_flair_text='" + link_flair_text + '\'' +
                 ", id='" + id + '\'' +
                 ", gilded=" + gilded +
                 ", clicked=" + clicked +
                 ", author='" + author + '\'' +
                 ", media=" + media +
                 ", score=" + score +
-                ", approvedBy='" + approvedBy + '\'' +
-                ", over18=" + over18 +
+                ", approved_by='" + approved_by + '\'' +
+                ", over_18=" + over_18 +
                 ", hidden=" + hidden +
                 ", thumbnail='" + thumbnail + '\'' +
-                ", subredditId='" + subredditId + '\'' +
+                ", subreddit_id='" + subreddit_id + '\'' +
                 ", edited=" + edited +
-                ", linkFlairCssClass='" + linkFlairCssClass + '\'' +
-                ", authorFlairCssClass='" + authorFlairCssClass + '\'' +
+                ", link_flair_css_class='" + link_flair_css_class + '\'' +
+                ", author_flair_css_class='" + author_flair_css_class + '\'' +
                 ", downs=" + downs +
                 ", saved=" + saved +
-                ", isSelf=" + isSelf +
+                ", is_self=" + is_self +
                 ", name='" + name + '\'' +
                 ", permalink='" + permalink + '\'' +
                 ", stickied=" + stickied +
                 ", created=" + created +
                 ", url='" + url + '\'' +
-                ", authorFlairText='" + authorFlairText + '\'' +
+                ", author_flair_text='" + author_flair_text + '\'' +
                 ", title='" + title + '\'' +
-                ", createdUtc=" + createdUtc +
+                ", created_utc=" + created_utc +
                 ", ups=" + ups +
-                ", numComments=" + numComments +
+                ", num_comments=" + num_comments +
                 ", visited=" + visited +
-                ", numReports=" + numReports +
+                ", num_reports=" + num_reports +
                 '}';
     }
 }
