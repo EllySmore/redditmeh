@@ -1,7 +1,5 @@
 package ellysmore.redditmeh.api.models.Listing;
 
-import com.google.gson.annotations.Expose;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,48 +7,28 @@ import ellysmore.redditmeh.api.models.BaseModel;
 
 public class Data extends BaseModel {
 
-    @Expose
     private String modhash;
 
-    @Expose
     private List<Child> children = new ArrayList<Child>();
 
-    @Expose
     private String after;
 
-    @Expose
     private String before;
 
     public String getModhash() {
         return modhash;
     }
 
-    public void setModhash(String modhash) {
-        this.modhash = modhash;
-    }
-
     public List<Child> getChildren() {
         return children;
-    }
-
-    public void setChildren(List<Child> children) {
-        this.children = children;
     }
 
     public String getAfter() {
         return after;
     }
 
-    public void setAfter(String after) {
-        this.after = after;
-    }
-
     public String getBefore() {
         return before;
-    }
-
-    public void setBefore(String before) {
-        this.before = before;
     }
 
     @Override

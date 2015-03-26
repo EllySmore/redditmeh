@@ -1,31 +1,19 @@
 package ellysmore.redditmeh.api.models.Listing;
 
-import com.google.gson.annotations.Expose;
-
 import ellysmore.redditmeh.api.models.BaseModel;
 
 public class Child extends BaseModel {
 
-    @Expose
     private String kind;
 
-    @Expose
     private Data_ data;
 
     public String getKind() {
         return kind;
     }
 
-    public void setKind(String kind) {
-        this.kind = kind;
-    }
-
     public Data_ getData() {
         return data;
-    }
-
-    public void setData(Data_ data) {
-        this.data = data;
     }
 
     @Override

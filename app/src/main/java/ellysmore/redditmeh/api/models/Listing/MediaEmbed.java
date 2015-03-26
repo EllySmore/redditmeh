@@ -1,53 +1,31 @@
 package ellysmore.redditmeh.api.models.Listing;
 
-import com.google.gson.annotations.Expose;
-
 import ellysmore.redditmeh.api.models.BaseModel;
 
 public class MediaEmbed extends BaseModel {
 
-    @Expose
     private String content;
 
-    @Expose
     private int width;
 
-    @Expose
     private boolean scrolling;
 
-    @Expose
     private int height;
 
     public String getContent() {
         return content;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     public int getWidth() {
         return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
     }
 
     public boolean isScrolling() {
         return scrolling;
     }
 
-    public void setScrolling(boolean scrolling) {
-        this.scrolling = scrolling;
-    }
-
     public int getHeight() {
         return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
     }
 
     @Override
