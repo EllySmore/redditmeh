@@ -4,9 +4,11 @@ redditmeh
 
 Android app that display reddit listings.
 
+Updates 3/27/2015: 
+- Pagination! You betcha :D
+
 WIP.
 Currently working on:
-- Pagination
 - Caching and Persisting data
 - StaggeredGridView for certain subreddits
 - Showing failed connection screen via croutons
