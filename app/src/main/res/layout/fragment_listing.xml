@@ -25,6 +25,13 @@
             android:divider="@null"
             android:dividerHeight="0dp" />
 
+        <ellysmore.redditmeh.ui.listing.subreddit.widgets.Footer
+            android:id="@+id/footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/c1_3_160_opacity"
+            android:visibility="invisible" />
     </RelativeLayout>
 
 </android.support.v4.widget.SwipeRefreshLayout>
