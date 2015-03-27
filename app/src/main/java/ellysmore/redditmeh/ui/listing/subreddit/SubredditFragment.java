@@ -37,6 +37,10 @@ public class SubredditFragment
 
     private ListingDisplayInfo mListingDisplayInfo;
 
+    public static SubredditFragment newInstance() {
+        return SubredditFragment.newInstance(null);
+    }
+
     public static SubredditFragment newInstance(String subredditName) {
         SubredditFragment
                 subredditFragment = new SubredditFragment();
@@ -51,7 +55,7 @@ public class SubredditFragment
         super.onCreate(savedInstanceState);
         Bundle extras = getArguments();
         if (extras != null) {
-            mSubredditName = extras.getString(PARAM_SUBREDDIT_NAME);
+            mSubredditName = extras.getString(PARAM_SUBREDDIT_NAME, null);
         }
     }
 
@@ -64,13 +68,23 @@ public class SubredditFragment
         setUpSwipeRefreshLayout();
         setUpListScrollListener();
         fetchSubredditListing();
+
+        if (mSubredditName == null) {
+            fetchFrontPageListing();
+        } else {
+            fetchSubredditListing();
+        }
         return mRootView;
     }
 
     @Override
     public void onRefresh() {
         super.onRefresh();
-        fetchSubredditListing();
+        if (mSubredditName == null) {
+            fetchFrontPageListing();
+        } else {
+            fetchSubredditListing();
+        }
     }
 
     private void setUpAdapter() {
@@ -109,6 +123,32 @@ public class SubredditFragment
                 });
     }
 
+    public void fetchFrontPageListing() {
+        Observable<Listing> observable = NetworkClient.getInstance()
+                .getRedditApiService()
+                .getFrontPageListing(Constants.LISTING_TYPE_HOT);
+        observable.observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Listing>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onNext(Listing subredditListing) {
+                        mListingDisplayInfo = new ListingDisplayInfo(subredditListing);
+                        mListingAdapter.setData(mListingDisplayInfo);
+                        mListingAdapter.notifyDataSetChanged();
+                        showLoading(false);
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
+                });
+    }
+
     private void showLoading(boolean isLoading) {
         if (isLoading) {
             mList.setVisibility(View.GONE);
@@ -118,6 +158,5 @@ public class SubredditFragment
             mProgressBar.setVisibility(View.GONE);
         }
     }
-
 
 }

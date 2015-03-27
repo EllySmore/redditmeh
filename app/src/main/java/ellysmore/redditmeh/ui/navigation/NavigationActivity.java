@@ -7,7 +7,6 @@ import android.support.v7.widget.Toolbar;
 import ellysmore.redditmeh.R;
 import ellysmore.redditmeh.ui.commons.BaseActivity;
 import ellysmore.redditmeh.ui.commons.BaseFragmentWithSwipeRefreshListener;
-import ellysmore.redditmeh.ui.listing.frontpage.FrontPageFragment;
 import ellysmore.redditmeh.ui.listing.subreddit.SubredditFragment;
 import ellysmore.redditmeh.ui.navigation.models.NavItems;
 
@@ -36,7 +35,7 @@ public class NavigationActivity extends BaseActivity implements
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
                     .add(getContainerId(),
-                            FrontPageFragment.newInstance())
+                            SubredditFragment.newInstance())
                     .commit();
         }
     }
@@ -50,7 +49,7 @@ public class NavigationActivity extends BaseActivity implements
         BaseFragmentWithSwipeRefreshListener fragment = null;
         switch (navItems) {
             case FRONT_PAGE:
-                fragment = FrontPageFragment.newInstance();
+                fragment = SubredditFragment.newInstance();
                 break;
             case AWW:
                 fragment = SubredditFragment
