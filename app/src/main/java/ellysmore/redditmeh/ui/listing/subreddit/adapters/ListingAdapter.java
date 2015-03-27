@@ -7,6 +7,7 @@ import android.widget.BaseAdapter;
 
 import ellysmore.redditmeh.R;
 import ellysmore.redditmeh.api.models.Listing.Data_;
+import ellysmore.redditmeh.api.models.Listing.Listing;
 import ellysmore.redditmeh.ui.listing.subreddit.models.ListingDisplayInfo;
 import ellysmore.redditmeh.ui.listing.subreddit.widgets.ListingRow;
 
@@ -51,6 +52,10 @@ public class ListingAdapter extends BaseAdapter {
 
     public void setData(ListingDisplayInfo data) {
         mData = data;
+    }
+
+    public void setData(Listing data) {
+        mData.add(data);
     }
 
 }

@@ -7,4 +7,6 @@ public class Constants {
     public static final String LISTING_TYPE_NEW = "new";
 
     public static final String LISTING_TYPE_TOP = "top";
+
+    public static final int LIMIT = 25;
 }

@@ -14,4 +14,8 @@
     <string name="programming">programming</string>
     <string name="shower_thoughts">Showerthoughts</string>
 
+    <!--Row -->
+
+    <string name="thumbnail_desc">Thumbnail image of post</string>
+
 </resources>

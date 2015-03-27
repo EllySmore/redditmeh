@@ -15,6 +15,7 @@ import ellysmore.redditmeh.api.models.Listing.Listing;
 import ellysmore.redditmeh.ui.commons.BaseFragmentWithSwipeRefreshListener;
 import ellysmore.redditmeh.ui.listing.subreddit.adapters.ListingAdapter;
 import ellysmore.redditmeh.ui.listing.subreddit.models.ListingDisplayInfo;
+import ellysmore.redditmeh.ui.listing.subreddit.widgets.Footer;
 import rx.Observable;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -29,6 +30,9 @@ public class SubredditFragment
     @InjectView(R.id.progress_bar)
     protected ProgressBar mProgressBar;
 
+    @InjectView(R.id.footer)
+    protected Footer mFooter;
+
     private View mRootView;
 
     private String mSubredditName;
@@ -36,6 +40,10 @@ public class SubredditFragment
     private ListingAdapter mListingAdapter;
 
     private ListingDisplayInfo mListingDisplayInfo;
+
+    public static SubredditFragment newInstance() {
+        return SubredditFragment.newInstance(null);
+    }
 
     public static SubredditFragment newInstance(String subredditName) {
         SubredditFragment
@@ -51,7 +59,7 @@ public class SubredditFragment
         super.onCreate(savedInstanceState);
         Bundle extras = getArguments();
         if (extras != null) {
-            mSubredditName = extras.getString(PARAM_SUBREDDIT_NAME);
+            mSubredditName = extras.getString(PARAM_SUBREDDIT_NAME, null);
         }
     }
 
@@ -63,14 +71,19 @@ public class SubredditFragment
         setUpAdapter();
         setUpSwipeRefreshLayout();
         setUpListScrollListener();
-        fetchSubredditListing();
+        fetchListing();
         return mRootView;
+    }
+
+    @Override
+    public void reachBottomOfList() {
+        fetchNextListing();
     }
 
     @Override
     public void onRefresh() {
         super.onRefresh();
-        fetchSubredditListing();
+        fetchListing();
     }
 
     private void setUpAdapter() {
@@ -83,10 +96,32 @@ public class SubredditFragment
         setUpSwipeRefreshColorScheme();
     }
 
+    private void fetchListing() {
+        mIsFetchingNext = true;
+        if (mSubredditName == null) {
+            fetchFrontPageListing();
+        } else {
+            fetchSubredditListing();
+        }
+    }
+
+    private void fetchNextListing() {
+        mIsFetchingNext = true;
+        showFooterLoading();
+        mIsFetchingNext = true;
+        if (mSubredditName == null) {
+            fetchNextFrontPageListing();
+        } else {
+            fetchNextSubredditListing();
+        }
+
+    }
+
     private void fetchSubredditListing() {
         Observable<Listing> observable = NetworkClient.getInstance()
                 .getRedditApiService()
                 .getSubRedditListing(mSubredditName, Constants.LISTING_TYPE_HOT);
+
         observable.observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Listing>() {
                     @Override
@@ -103,13 +138,102 @@ public class SubredditFragment
                         mListingDisplayInfo = new ListingDisplayInfo(subredditListing);
                         mListingAdapter.setData(mListingDisplayInfo);
                         mListingAdapter.notifyDataSetChanged();
-                        showLoading(false);
+                        showContentLoading(false);
                         mSwipeRefreshLayout.setRefreshing(false);
+                        mIsFetchingNext = false;
                     }
                 });
     }
 
-    private void showLoading(boolean isLoading) {
+    private void fetchNextSubredditListing() {
+        Observable<Listing> observable = NetworkClient.getInstance()
+                .getRedditApiService()
+                .getNextSubredditListing(mSubredditName,
+                        Constants.LISTING_TYPE_HOT,
+                        mListingDisplayInfo.getAfterTag(),
+                        Constants.LIMIT);
+
+        observable.observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Listing>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                        hideFooterLoading();
+                    }
+
+                    @Override
+                    public void onNext(Listing subredditListing) {
+                        mListingAdapter.setData(subredditListing);
+                        mListingAdapter.notifyDataSetChanged();
+                        mIsFetchingNext = false;
+                        hideFooterLoading();
+                    }
+                });
+    }
+
+    private void fetchFrontPageListing() {
+        Observable<Listing> observable = NetworkClient.getInstance()
+                .getRedditApiService()
+                .getFrontPageListing(Constants.LISTING_TYPE_HOT);
+
+        observable.observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Listing>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onNext(Listing subredditListing) {
+                        mListingDisplayInfo = new ListingDisplayInfo(subredditListing);
+                        mListingAdapter.setData(mListingDisplayInfo);
+                        mListingAdapter.notifyDataSetChanged();
+                        showContentLoading(false);
+                        mSwipeRefreshLayout.setRefreshing(false);
+                        mIsFetchingNext = false;
+                    }
+                });
+    }
+
+    private void fetchNextFrontPageListing() {
+        Observable<Listing> observable = NetworkClient.getInstance()
+                .getRedditApiService()
+                .getNextFrontPageListing(
+                        Constants.LISTING_TYPE_HOT,
+                        mListingDisplayInfo.getAfterTag(),
+                        Constants.LIMIT);
+
+        observable.observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Listing>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                        hideFooterLoading();
+                    }
+
+                    @Override
+                    public void onNext(Listing subredditListing) {
+                        mListingAdapter.setData(subredditListing);
+                        mListingAdapter.notifyDataSetChanged();
+                        mIsFetchingNext = false;
+                        hideFooterLoading();
+                    }
+                });
+    }
+
+    private void showContentLoading(boolean isLoading) {
         if (isLoading) {
             mList.setVisibility(View.GONE);
             mProgressBar.setVisibility(View.VISIBLE);
@@ -119,5 +243,14 @@ public class SubredditFragment
         }
     }
 
+    private void showFooterLoading() {
+        mFooter.setVisibility(View.VISIBLE);
+        mFooter.showLoading();
+    }
+
+    private void hideFooterLoading() {
+        mFooter.setVisibility(View.INVISIBLE);
+        mFooter.hideLoading();
+    }
 
 }

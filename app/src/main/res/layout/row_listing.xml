@@ -1,71 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/card_view"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/listing_row_height"
-    android:layout_gravity="center"
-    android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp"
-    android:layout_marginTop="2dp"
-    android:clickable="true"
-    android:foreground="?android:attr/selectableItemBackground"
-    app:cardBackgroundColor="@android:color/white"
-    app:cardCornerRadius="4dp"
-    app:cardElevation="2dp"
-    app:cardPreventCornerOverlap="false">
+<merge xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout
-        android:id="@+id/card_info"
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/thumbnail"
-            android:layout_width="@dimen/listing_row_height"
-            android:layout_height="@dimen/listing_row_height"
-            android:layout_alignParentLeft="true" />
+        android:layout_height="@dimen/listing_row_height"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="2dp"
+        app:cardPreventCornerOverlap="false">
 
         <RelativeLayout
-            android:id="@+id/text_info"
+            android:id="@+id/card_info"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="4dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginTop="4dp"
-            android:layout_toRightOf="@id/thumbnail">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/title"
-                style="@style/TextStyle.ListingRow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="4"
-                android:text="TITLE"
-                android:textSize="@dimen/listing_title_textsize" />
+            <ImageView
+                android:id="@+id/thumbnail"
+                android:layout_width="@dimen/listing_row_height"
+                android:layout_height="@dimen/listing_row_height"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:contentDescription="@string/thumbnail_desc" />
 
-            <TextView
-                android:id="@+id/author"
-                style="@style/TextStyle.ListingRow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/title"
-                android:text="Author"
-                android:textColor="@color/c3_2"
-                android:textSize="@dimen/listing_author_textsize" />
+            <RelativeLayout
+                android:id="@+id/text_info"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:layout_toEndOf="@id/thumbnail"
+                android:layout_toRightOf="@id/thumbnail">
 
-            <TextView
-                android:id="@+id/num_comments"
-                style="@style/TextStyle.ListingRow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:text="77 comments"
-                android:textColor="@color/c2_2"
-                android:textSize="@dimen/listing_num_comments_textsize"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/title"
+                    style="@style/TextStyle.ListingRow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="4"
+                    android:textSize="@dimen/listing_title_textsize"
+                    tools:text="TITLE" />
+
+                <TextView
+                    android:id="@+id/author"
+                    style="@style/TextStyle.ListingRow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/title"
+                    android:textColor="@color/c3_2"
+                    android:textSize="@dimen/listing_author_textsize"
+                    tools:text="Author" />
+
+                <TextView
+                    android:id="@+id/num_comments"
+                    style="@style/TextStyle.ListingRow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:textColor="@color/c2_2"
+                    android:textSize="@dimen/listing_num_comments_textsize"
+                    android:textStyle="bold"
+                    tools:text="77 comments" />
+            </RelativeLayout>
         </RelativeLayout>
-    </RelativeLayout>
-</android.support.v7.widget.CardView>
+    </android.support.v7.widget.CardView>
+</merge>
