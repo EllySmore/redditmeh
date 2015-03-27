@@ -26,6 +26,8 @@ public abstract class BaseFragmentWithSwipeRefreshListener extends BaseFragment
 
     private int mLastPosition = 0;
 
+    public abstract void reachBottomOfList();
+
     protected void setUpListScrollListener() {
         mList.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -48,6 +50,7 @@ public abstract class BaseFragmentWithSwipeRefreshListener extends BaseFragment
 
                     if (mLastPosition != firstVisibleItem && !mIsFetchingNext) {
                         mLastPosition = firstVisibleItem;
+                        reachBottomOfList();
                     }
                 }
             }
