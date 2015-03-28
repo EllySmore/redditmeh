@@ -21,9 +21,14 @@ public class RoundedTransformation implements com.squareup.picasso.Transformatio
 
     private int mMargin;
 
-    public RoundedTransformation(int allRadius, final int margin) {
+    /**
+     * Specify radius in DP for all 4 corners and margin space between parent view
+     * @param allRadius
+     * @param margin
+     */
+    public RoundedTransformation(int allRadius, int margin) {
         mAllRadius = allRadius;
-        this.mMargin = margin;
+        mMargin = margin;
     }
 
     public RoundedTransformation(int topCornerLeftRadius, int topCornerRightRadius,
@@ -32,7 +37,7 @@ public class RoundedTransformation implements com.squareup.picasso.Transformatio
         mTopCornerRightRadius = topCornerRightRadius;
         mBottomCornerLeftRadius = bottomCornerLeftRadius;
         mBottomCornerRightRadius = bottomCornerRightRadius;
-        this.mMargin = margin;
+        mMargin = margin;
     }
 
 
