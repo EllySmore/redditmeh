@@ -71,7 +71,7 @@ public class SubredditFragment
         setUpAdapter();
         setUpSwipeRefreshLayout();
         setUpListScrollListener();
-        fetchListing();
+        fetchInitialListing();
         return mRootView;
     }
 
@@ -83,7 +83,7 @@ public class SubredditFragment
     @Override
     public void onRefresh() {
         super.onRefresh();
-        fetchListing();
+        fetchInitialListing();
     }
 
     private void setUpAdapter() {
@@ -96,8 +96,11 @@ public class SubredditFragment
         setUpSwipeRefreshColorScheme();
     }
 
-    private void fetchListing() {
-        mIsFetchingNext = true;
+    /**
+     * This must be fetched first before fetching next set of data.
+     */
+    private void fetchInitialListing() {
+        mIsFetching = true;
         if (mSubredditName == null) {
             fetchFrontPageListing();
         } else {
@@ -106,15 +109,13 @@ public class SubredditFragment
     }
 
     private void fetchNextListing() {
-        mIsFetchingNext = true;
+        mIsFetching = true;
         showFooterLoading();
-        mIsFetchingNext = true;
         if (mSubredditName == null) {
             fetchNextFrontPageListing();
         } else {
             fetchNextSubredditListing();
         }
-
     }
 
     private void fetchSubredditListing() {
@@ -140,7 +141,7 @@ public class SubredditFragment
                         mListingAdapter.notifyDataSetChanged();
                         showContentLoading(false);
                         mSwipeRefreshLayout.setRefreshing(false);
-                        mIsFetchingNext = false;
+                        mIsFetching = false;
                     }
                 });
     }
@@ -169,7 +170,7 @@ public class SubredditFragment
                     public void onNext(Listing subredditListing) {
                         mListingAdapter.setData(subredditListing);
                         mListingAdapter.notifyDataSetChanged();
-                        mIsFetchingNext = false;
+                        mIsFetching = false;
                         hideFooterLoading();
                     }
                 });
@@ -198,7 +199,7 @@ public class SubredditFragment
                         mListingAdapter.notifyDataSetChanged();
                         showContentLoading(false);
                         mSwipeRefreshLayout.setRefreshing(false);
-                        mIsFetchingNext = false;
+                        mIsFetching = false;
                     }
                 });
     }
@@ -227,7 +228,7 @@ public class SubredditFragment
                     public void onNext(Listing subredditListing) {
                         mListingAdapter.setData(subredditListing);
                         mListingAdapter.notifyDataSetChanged();
-                        mIsFetchingNext = false;
+                        mIsFetching = false;
                         hideFooterLoading();
                     }
                 });
