@@ -20,10 +20,10 @@ import rx.Observable;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 
-public class SubredditFragment
+public class ListingFragment
         extends BaseFragmentWithSwipeRefreshListener {
 
-    private static final String TAG = SubredditFragment.class.getSimpleName();
+    private static final String TAG = ListingFragment.class.getSimpleName();
 
     private static final String PARAM_SUBREDDIT_NAME = "PARAM_SUBREDDIT_NAME";
 
@@ -41,17 +41,17 @@ public class SubredditFragment
 
     private ListingDisplayInfo mListingDisplayInfo;
 
-    public static SubredditFragment newInstance() {
-        return SubredditFragment.newInstance(null);
+    public static ListingFragment newInstance() {
+        return ListingFragment.newInstance(null);
     }
 
-    public static SubredditFragment newInstance(String subredditName) {
-        SubredditFragment
-                subredditFragment = new SubredditFragment();
+    public static ListingFragment newInstance(String subredditName) {
+        ListingFragment
+                listingFragment = new ListingFragment();
         Bundle bundle = new Bundle();
         bundle.putString(PARAM_SUBREDDIT_NAME, subredditName);
-        subredditFragment.setArguments(bundle);
-        return subredditFragment;
+        listingFragment.setArguments(bundle);
+        return listingFragment;
     }
 
     @Override
