@@ -4,7 +4,7 @@ redditmeh
 
 Android app that display reddit listings.
 
-Updates 3/27/2015:
+Updated on 3/27/2015:
 - Pagination! You betcha :D
 
 WIP.
