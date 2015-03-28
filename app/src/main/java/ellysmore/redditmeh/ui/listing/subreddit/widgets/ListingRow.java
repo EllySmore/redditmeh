@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import ellysmore.redditmeh.Constants;
 import ellysmore.redditmeh.R;
 import ellysmore.redditmeh.api.models.Listing.Data_;
 import ellysmore.redditmeh.util.RoundedTransformation;
@@ -53,16 +54,17 @@ public class ListingRow extends RelativeLayout {
     }
 
     public void loadImage() {
-        String thumbnailUrl = mData.getThumbnail();
-        if (thumbnailUrl != null && thumbnailUrl.isEmpty()) {
-            thumbnailUrl = null;
-        }
-        if (thumbnailUrl == null) {
+        if (mData.isOver18()) {
+            Picasso.with(getContext()).load(R.drawable.redditplaceholder_nsfw)
+                    .transform(new RoundedTransformation(4, 0)).fit().into(mThumbnail);
+        } else if (mData.getThumbnail() == null || mData.getThumbnail().isEmpty() || mData
+                .getThumbnail().equalsIgnoreCase(Constants.SELF)) {
             Picasso.with(getContext()).load(R.drawable.redditplaceholder)
                     .transform(new RoundedTransformation(4, 0)).fit().into(mThumbnail);
         } else {
-            Picasso.with(getContext()).load(thumbnailUrl)
+            Picasso.with(getContext()).load(mData.getThumbnail())
                     .transform(new RoundedTransformation(4, 0)).fit().into(mThumbnail);
         }
     }
+
 }
