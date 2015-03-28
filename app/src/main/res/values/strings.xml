@@ -17,5 +17,7 @@
     <!--Row -->
 
     <string name="thumbnail_desc">Thumbnail image of post</string>
+    <string name="submitted_by_x">submitted by %s</string>
+    <string name="x_comments">%d comments</string>
 
 </resources>

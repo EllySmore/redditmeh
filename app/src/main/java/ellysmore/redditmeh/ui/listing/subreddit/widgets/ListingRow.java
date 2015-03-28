@@ -47,8 +47,8 @@ public class ListingRow extends RelativeLayout {
     public void updateUI(Data_ data) {
         mData = data;
         mTitle.setText(data.getTitle());
-        mAuthor.setText("submitted by " + data.getAuthor());
-        mNumComments.setText(String.format("%d comments", data.getNumComments()));
+        mAuthor.setText(getResources().getString(R.string.submitted_by_x, data.getAuthor()));
+        mNumComments.setText(getResources().getString(R.string.x_comments, data.getNumComments()));
         loadImage();
     }
 
