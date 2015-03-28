@@ -7,7 +7,7 @@ import android.support.v7.widget.Toolbar;
 import ellysmore.redditmeh.R;
 import ellysmore.redditmeh.ui.commons.BaseActivity;
 import ellysmore.redditmeh.ui.commons.BaseFragmentWithSwipeRefreshListener;
-import ellysmore.redditmeh.ui.listing.subreddit.SubredditFragment;
+import ellysmore.redditmeh.ui.listing.subreddit.ListingFragment;
 import ellysmore.redditmeh.ui.navigation.models.NavItems;
 
 public class NavigationActivity extends BaseActivity implements
@@ -35,7 +35,7 @@ public class NavigationActivity extends BaseActivity implements
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
                     .add(getContainerId(),
-                            SubredditFragment.newInstance())
+                            ListingFragment.newInstance())
                     .commit();
         }
     }
@@ -49,26 +49,26 @@ public class NavigationActivity extends BaseActivity implements
         BaseFragmentWithSwipeRefreshListener fragment = null;
         switch (navItems) {
             case FRONT_PAGE:
-                fragment = SubredditFragment.newInstance();
+                fragment = ListingFragment.newInstance();
                 break;
             case AWW:
-                fragment = SubredditFragment
+                fragment = ListingFragment
                         .newInstance(getString(R.string.aww));
                 break;
             case FUNNY:
-                fragment = SubredditFragment
+                fragment = ListingFragment
                         .newInstance(getString(R.string.funny));
                 break;
             case PICS:
-                fragment = SubredditFragment
+                fragment = ListingFragment
                         .newInstance(getString(R.string.pics));
                 break;
             case PROGRAMMING:
-                fragment = SubredditFragment
+                fragment = ListingFragment
                         .newInstance(getString(R.string.programming));
                 break;
             case SHOWER_THOUGHTS:
-                fragment = SubredditFragment
+                fragment = ListingFragment
                         .newInstance(getString(R.string.shower_thoughts));
                 break;
             default:

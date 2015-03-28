@@ -22,7 +22,7 @@ public abstract class BaseFragmentWithSwipeRefreshListener extends BaseFragment
     @InjectView(R.id.swipe_container)
     protected SwipeRefreshLayout mSwipeRefreshLayout;
 
-    protected boolean mIsFetchingNext;
+    protected boolean mIsFetching;
 
     private int mLastPosition = 0;
 
@@ -48,7 +48,7 @@ public abstract class BaseFragmentWithSwipeRefreshListener extends BaseFragment
                             " visibleItemCount: " + visibleItemCount +
                             " totalItemCount: " + totalItemCount);
 
-                    if (mLastPosition != firstVisibleItem && !mIsFetchingNext) {
+                    if (mLastPosition != firstVisibleItem && !mIsFetching) {
                         mLastPosition = firstVisibleItem;
                         reachBottomOfList();
                     }
@@ -66,6 +66,5 @@ public abstract class BaseFragmentWithSwipeRefreshListener extends BaseFragment
     public void onRefresh() {
         //no op
     }
-
 
 }
