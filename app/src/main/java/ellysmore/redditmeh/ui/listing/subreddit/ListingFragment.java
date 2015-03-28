@@ -86,6 +86,7 @@ public class ListingFragment
         fetchInitialListing();
     }
 
+    //region SetUp
     private void setUpAdapter() {
         mListingAdapter = new ListingAdapter();
         mList.setAdapter(mListingAdapter);
@@ -95,12 +96,15 @@ public class ListingFragment
         mSwipeRefreshLayout.setOnRefreshListener(this);
         setUpSwipeRefreshColorScheme();
     }
+    //endregion
 
+    //region API calls
     /**
      * This must be fetched first before fetching next set of data.
      */
     private void fetchInitialListing() {
         mIsFetching = true;
+        showContentLoading();
         if (mSubredditName == null) {
             fetchFrontPageListing();
         } else {
@@ -139,7 +143,7 @@ public class ListingFragment
                         mListingDisplayInfo = new ListingDisplayInfo(subredditListing);
                         mListingAdapter.setData(mListingDisplayInfo);
                         mListingAdapter.notifyDataSetChanged();
-                        showContentLoading(false);
+                        hideContentLoading();
                         mSwipeRefreshLayout.setRefreshing(false);
                         mIsFetching = false;
                     }
@@ -197,7 +201,7 @@ public class ListingFragment
                         mListingDisplayInfo = new ListingDisplayInfo(subredditListing);
                         mListingAdapter.setData(mListingDisplayInfo);
                         mListingAdapter.notifyDataSetChanged();
-                        showContentLoading(false);
+                        hideContentLoading();
                         mSwipeRefreshLayout.setRefreshing(false);
                         mIsFetching = false;
                     }
@@ -233,15 +237,17 @@ public class ListingFragment
                     }
                 });
     }
+    //endregion
 
-    private void showContentLoading(boolean isLoading) {
-        if (isLoading) {
-            mList.setVisibility(View.GONE);
-            mProgressBar.setVisibility(View.VISIBLE);
-        } else {
-            mList.setVisibility(View.VISIBLE);
-            mProgressBar.setVisibility(View.GONE);
-        }
+    //region ToggleViews
+    private void showContentLoading() {
+        mList.setVisibility(View.GONE);
+        mProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    private void hideContentLoading() {
+        mList.setVisibility(View.VISIBLE);
+        mProgressBar.setVisibility(View.GONE);
     }
 
     private void showFooterLoading() {
@@ -253,5 +259,5 @@ public class ListingFragment
         mFooter.setVisibility(View.INVISIBLE);
         mFooter.hideLoading();
     }
-
+    //endregion
 }
