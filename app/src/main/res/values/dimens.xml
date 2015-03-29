@@ -6,7 +6,7 @@
     <dimen name="row_height">48dp</dimen>
     <dimen name="listing_row_height">115dp</dimen>
     <dimen name="listing_title_textsize">12sp</dimen>
-    <dimen name="listing_author_textsize">12sp</dimen>
+    <dimen name="listing_submitted_textsize">10sp</dimen>
     <dimen name="listing_button_textsize">12sp</dimen>
 
     <dimen name="navigation_bar_width">260dp</dimen>

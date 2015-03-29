@@ -15,9 +15,9 @@
     <string name="shower_thoughts">Showerthoughts</string>
 
     <!--Row -->
-
     <string name="thumbnail_desc">Thumbnail image of post</string>
     <string name="submitted_by_x">submitted by %s</string>
     <string name="x_comments">%d comments</string>
+    <string name="xtime_by_xauthor">%1$s \u2022 %2$s</string>
 
 </resources>
