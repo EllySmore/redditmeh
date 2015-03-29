@@ -23,11 +23,11 @@ public class ListingRow extends RelativeLayout {
     @InjectView(R.id.author)
     protected TextView mAuthor;
 
-    @InjectView(R.id.num_comments)
-    protected TextView mNumComments;
-
     @InjectView(R.id.thumbnail)
     protected ImageView mThumbnail;
+
+    @InjectView(R.id.flatbutton)
+    protected FlatButton mFlatButton;
 
     private Data_ mData;
 
@@ -49,7 +49,7 @@ public class ListingRow extends RelativeLayout {
         mData = data;
         mTitle.setText(data.getTitle());
         mAuthor.setText(getResources().getString(R.string.submitted_by_x, data.getAuthor()));
-        mNumComments.setText(getResources().getString(R.string.x_comments, data.getNumComments()));
+        mFlatButton.setText(String.valueOf(data.getNumComments()));
         loadImage();
     }
 
@@ -60,10 +60,10 @@ public class ListingRow extends RelativeLayout {
         } else if (mData.getThumbnail() == null || mData.getThumbnail().isEmpty() || mData
                 .getThumbnail().equalsIgnoreCase(Constants.SELF)) {
             Picasso.with(getContext()).load(R.drawable.redditplaceholder)
-                    .transform(new RoundedTransformation(4, 0)).fit().into(mThumbnail);
+                    .transform(new RoundedTransformation(2, 0)).fit().into(mThumbnail);
         } else {
             Picasso.with(getContext()).load(mData.getThumbnail())
-                    .transform(new RoundedTransformation(4, 0)).fit().into(mThumbnail);
+                    .transform(new RoundedTransformation(2, 0)).fit().into(mThumbnail);
         }
     }
 
