@@ -52,8 +52,7 @@ public class ListingRow extends RelativeLayout {
         mData = data;
         mTitle.setText(data.getTitle());
         mSubredditByDomain.setText(getResources()
-                .getString(R.string.xtime_by_xauthor, data.getSubreddit(), data.getDomain(),
-                        data.getAuthor()));
+                .getString(R.string.xtime_by_xauthor, data.getSubreddit(), data.getDomain()));
         mTimeByAuthor.setText(getResources()
                 .getString(R.string.xtime_by_xauthor, data.getCreated(),
                         data.getAuthor()));
