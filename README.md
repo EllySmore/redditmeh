@@ -15,7 +15,7 @@ Currently working on:
 - Allowing user login
 
 <img src="http://i1314.photobucket.com/albums/t572/awula333/s2_zps4693c0bf.png" width="240px" height="400px" border="0" alt=" photo s2_zps4693c0bf.png"/>
-<img src="http://s1314.photobucket.com/user/awula333/media/new_screen_zpsbzxwmdim.png" width="240px" height="400px" border="0" alt=" photo s1_zps6da13cd3.png"/>
+<img src="http://i1314.photobucket.com/albums/t572/awula333/new_screen_zpsbzxwmdim.png" width="240px" height="400px" border="0" alt=" photo s1_zps6da13cd3.png"/>
 
 New Launcher Icon based off from cat icon in japanese pack.
 
