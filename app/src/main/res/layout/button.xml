@@ -24,11 +24,13 @@
 
         <TextView
             android:id="@+id/text"
-            android:layout_width="wrap_content"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/icon"
             android:layout_toRightOf="@+id/icon"
+            android:gravity="center_horizontal"
+            android:maxEms="5"
             android:textSize="@dimen/listing_button_textsize"
             tools:text="Text" />
     </RelativeLayout>

@@ -46,15 +46,33 @@
                     tools:text="TITLE" />
 
                 <TextView
-                    android:id="@+id/time_author"
+                    android:id="@+id/subreddit_by_domain"
                     style="@style/TextStyle.ListingRow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_above="@+id/time_by_author"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_toLeftOf="@+id/flatbutton"
+                    android:paddingLeft="2dp"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="@dimen/listing_submitted_textsize"
+                    tools:text="Subreddit by Domain" />
+
+                <TextView
+                    android:id="@+id/time_by_author"
+                    style="@style/TextStyle.ListingRow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/subreddit_by_domain"
                     android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignRight="@+id/subreddit_by_domain"
                     android:padding="2dp"
                     android:textColor="@android:color/darker_gray"
                     android:textSize="@dimen/listing_submitted_textsize"
-                    tools:text="Author" />
+                    tools:text="Subreddit Time by Author" />
 
                 <ellysmore.redditmeh.ui.listing.subreddit.widgets.FlatButton
                     android:id="@+id/flatbutton"

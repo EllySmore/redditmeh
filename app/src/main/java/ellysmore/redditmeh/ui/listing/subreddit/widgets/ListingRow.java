@@ -20,8 +20,11 @@ public class ListingRow extends RelativeLayout {
     @InjectView(R.id.title)
     protected TextView mTitle;
 
-    @InjectView(R.id.time_author)
-    protected TextView mAuthor;
+    @InjectView(R.id.subreddit_by_domain)
+    protected TextView mSubredditByDomain;
+
+    @InjectView(R.id.time_by_author)
+    protected TextView mTimeByAuthor;
 
     @InjectView(R.id.thumbnail)
     protected ImageView mThumbnail;
@@ -48,7 +51,12 @@ public class ListingRow extends RelativeLayout {
     public void updateUI(Data_ data) {
         mData = data;
         mTitle.setText(data.getTitle());
-        mAuthor.setText(getResources().getString(R.string.xtime_by_xauthor, data.getCreated(), data.getAuthor()));
+        mSubredditByDomain.setText(getResources()
+                .getString(R.string.xtime_by_xauthor, data.getSubreddit(), data.getDomain(),
+                        data.getAuthor()));
+        mTimeByAuthor.setText(getResources()
+                .getString(R.string.xtime_by_xauthor, data.getCreated(),
+                        data.getAuthor()));
         mFlatButton.setText(String.valueOf(data.getNumComments()));
         loadImage();
     }
