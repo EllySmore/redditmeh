@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import ellysmore.redditmeh.Constants;
 import ellysmore.redditmeh.R;
 import ellysmore.redditmeh.api.models.Listing.Data_;
 import ellysmore.redditmeh.util.RoundedTransformation;
@@ -19,14 +20,17 @@ public class ListingRow extends RelativeLayout {
     @InjectView(R.id.title)
     protected TextView mTitle;
 
-    @InjectView(R.id.author)
-    protected TextView mAuthor;
+    @InjectView(R.id.subreddit_by_domain)
+    protected TextView mSubredditByDomain;
 
-    @InjectView(R.id.num_comments)
-    protected TextView mNumComments;
+    @InjectView(R.id.time_by_author)
+    protected TextView mTimeByAuthor;
 
     @InjectView(R.id.thumbnail)
     protected ImageView mThumbnail;
+
+    @InjectView(R.id.flatbutton)
+    protected FlatButton mFlatButton;
 
     private Data_ mData;
 
@@ -47,22 +51,28 @@ public class ListingRow extends RelativeLayout {
     public void updateUI(Data_ data) {
         mData = data;
         mTitle.setText(data.getTitle());
-        mAuthor.setText("submitted by " + data.getAuthor());
-        mNumComments.setText(String.format("%d comments", data.getNumComments()));
+        mSubredditByDomain.setText(getResources()
+                .getString(R.string.xtime_by_xauthor, data.getSubreddit(), data.getDomain(),
+                        data.getAuthor()));
+        mTimeByAuthor.setText(getResources()
+                .getString(R.string.xtime_by_xauthor, data.getCreated(),
+                        data.getAuthor()));
+        mFlatButton.setText(String.valueOf(data.getNumComments()));
         loadImage();
     }
 
     public void loadImage() {
-        String thumbnailUrl = mData.getThumbnail();
-        if (thumbnailUrl != null && thumbnailUrl.isEmpty()) {
-            thumbnailUrl = null;
-        }
-        if (thumbnailUrl == null) {
+        if (mData.isOver18()) {
+            Picasso.with(getContext()).load(R.drawable.redditplaceholder_nsfw)
+                    .transform(new RoundedTransformation(4, 0)).fit().into(mThumbnail);
+        } else if (mData.getThumbnail() == null || mData.getThumbnail().isEmpty() || mData
+                .getThumbnail().equalsIgnoreCase(Constants.SELF)) {
             Picasso.with(getContext()).load(R.drawable.redditplaceholder)
-                    .transform(new RoundedTransformation(4, 0)).fit().into(mThumbnail);
+                    .transform(new RoundedTransformation(2, 0)).fit().into(mThumbnail);
         } else {
-            Picasso.with(getContext()).load(thumbnailUrl)
-                    .transform(new RoundedTransformation(4, 0)).fit().into(mThumbnail);
+            Picasso.with(getContext()).load(mData.getThumbnail())
+                    .transform(new RoundedTransformation(2, 0)).fit().into(mThumbnail);
         }
     }
+
 }

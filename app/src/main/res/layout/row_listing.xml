@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:tools="http://schemas.android.com/tools">
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="@dimen/listing_row_height"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardBackgroundColor="@android:color/white"
-        app:cardCornerRadius="4dp"
+        app:cardCornerRadius="2dp"
         app:cardElevation="2dp"
         app:cardPreventCornerOverlap="false">
 
@@ -41,30 +41,50 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:maxLines="4"
+                    android:maxLines="3"
                     android:textSize="@dimen/listing_title_textsize"
                     tools:text="TITLE" />
 
                 <TextView
-                    android:id="@+id/author"
+                    android:id="@+id/subreddit_by_domain"
                     style="@style/TextStyle.ListingRow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/title"
-                    android:textColor="@color/c3_2"
-                    android:textSize="@dimen/listing_author_textsize"
-                    tools:text="Author" />
+                    android:layout_above="@+id/time_by_author"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_toLeftOf="@+id/flatbutton"
+                    android:paddingLeft="2dp"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="@dimen/listing_submitted_textsize"
+                    tools:text="Subreddit by Domain" />
 
                 <TextView
-                    android:id="@+id/num_comments"
+                    android:id="@+id/time_by_author"
                     style="@style/TextStyle.ListingRow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/subreddit_by_domain"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignRight="@+id/subreddit_by_domain"
+                    android:padding="2dp"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="@dimen/listing_submitted_textsize"
+                    tools:text="Subreddit Time by Author" />
+
+                <ellysmore.redditmeh.ui.listing.subreddit.widgets.FlatButton
+                    android:id="@+id/flatbutton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:textColor="@color/c2_2"
-                    android:textSize="@dimen/listing_num_comments_textsize"
-                    android:textStyle="bold"
-                    tools:text="77 comments" />
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:clickable="true"
+                    app:backgroundColor="@drawable/c2_2_rounded_touchstate"
+                    app:leftIcon="@drawable/comment_icon_touchstate"
+                    app:textColor="@drawable/c2_2_white_touchstate" />
             </RelativeLayout>
         </RelativeLayout>
     </android.support.v7.widget.CardView>

@@ -65,7 +65,7 @@ public class Data_ extends BaseModel {
 
     private boolean stickied;
 
-    private float created;
+    private long created;
 
     private String url;
 
@@ -73,7 +73,7 @@ public class Data_ extends BaseModel {
 
     private String title;
 
-    private float created_utc;
+    private long created_utc;
 
     private int ups;
 
@@ -208,7 +208,7 @@ public class Data_ extends BaseModel {
         return stickied;
     }
 
-    public float getCreated() {
+    public long getCreated() {
         return created;
     }
 
@@ -224,7 +224,7 @@ public class Data_ extends BaseModel {
         return title;
     }
 
-    public float getCreatedUtc() {
+    public long getCreatedUtc() {
         return created_utc;
     }
 
