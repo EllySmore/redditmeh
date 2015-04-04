@@ -21,9 +21,6 @@ public class FlatButton extends RelativeLayout {
     @InjectView(R.id.text)
     protected TextView mText;
 
-    @InjectView(R.id.button_layout)
-    protected RelativeLayout mButtonLayout;
-
     public FlatButton(Context context) {
         this(context, null);
     }
@@ -60,7 +57,7 @@ public class FlatButton extends RelativeLayout {
             mText.setTextColor(textColorResId);
         }
 
-        mButtonLayout.setBackgroundResource(backgroundResId);
+        setBackgroundResource(backgroundResId);
 
         attributes.recycle();
     }

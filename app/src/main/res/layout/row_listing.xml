@@ -82,6 +82,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:clickable="true"
+                    android:padding="2dp"
                     app:backgroundColor="@drawable/c2_2_rounded_touchstate"
                     app:leftIcon="@drawable/comment_icon_touchstate"
                     app:textColor="@drawable/c2_2_white_touchstate" />
