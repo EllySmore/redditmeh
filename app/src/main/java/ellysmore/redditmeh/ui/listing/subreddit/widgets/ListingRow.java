@@ -8,12 +8,16 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import ellysmore.redditmeh.Constants;
 import ellysmore.redditmeh.R;
 import ellysmore.redditmeh.api.models.Listing.Data_;
 import ellysmore.redditmeh.util.RoundedTransformation;
+import ellysmore.redditmeh.util.TimeHelper;
 
 public class ListingRow extends RelativeLayout {
 
@@ -53,11 +57,20 @@ public class ListingRow extends RelativeLayout {
         mTitle.setText(data.getTitle());
         mSubredditByDomain.setText(getResources()
                 .getString(R.string.xtime_by_xauthor, data.getSubreddit(), data.getDomain()));
-        mTimeByAuthor.setText(getResources()
-                .getString(R.string.xtime_by_xauthor, data.getCreated(),
-                        data.getAuthor()));
         mFlatButton.setText(String.valueOf(data.getNumComments()));
+
+        final String postTimeDifference = getPostTimeDifference(data.getCreatedUtc());
+        mTimeByAuthor.setText(getResources()
+                .getString(R.string.xtime_by_xauthor, postTimeDifference,
+                        data.getAuthor()));
+
         loadImage();
+    }
+
+    private String getPostTimeDifference(long epochTimeInSeconds){
+        final long epochTimeInMillis = epochTimeInSeconds * 1000;
+        String timeDifference = TimeHelper.getDifference(new DateTime(epochTimeInMillis, DateTimeZone.UTC));
+        return getResources().getString(R.string.xtime, timeDifference);
     }
 
     public void loadImage() {
