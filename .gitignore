@@ -1,6 +1,20 @@
 .gradle
 /local.properties
-/.idea/workspace.xml
-/.idea/libraries
+
+# files for the dex VM
+*.dex
+
+# generated files
+bin/
+gen/
+
+# Android Studio
+*.iml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/datasources.xml
+.idea/dataSources.ids
+.idea
+
 .DS_Store
 /build
