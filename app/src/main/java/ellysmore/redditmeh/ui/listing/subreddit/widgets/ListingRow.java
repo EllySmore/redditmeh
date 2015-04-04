@@ -53,11 +53,18 @@ public class ListingRow extends RelativeLayout {
         mTitle.setText(data.getTitle());
         mSubredditByDomain.setText(getResources()
                 .getString(R.string.xtime_by_xauthor, data.getSubreddit(), data.getDomain()));
-        mTimeByAuthor.setText(getResources()
-                .getString(R.string.xtime_by_xauthor, data.getCreated(),
-                        data.getAuthor()));
         mFlatButton.setText(String.valueOf(data.getNumComments()));
+
+        final String postTimeDifference = getPostTimeDifference(data.getCreated());
+        mTimeByAuthor.setText(getResources()
+                .getString(R.string.xtime_by_xauthor, postTimeDifference,
+                        data.getAuthor()));
+
         loadImage();
+    }
+
+    private String getPostTimeDifference(Long timeCreatedInMillis){
+        return String.valueOf(timeCreatedInMillis);
     }
 
     public void loadImage() {
