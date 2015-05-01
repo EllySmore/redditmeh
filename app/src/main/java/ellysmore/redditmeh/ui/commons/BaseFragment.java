@@ -41,6 +41,7 @@ public class BaseFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
+        Log.v(TAG, "onStop");
         try {
             EventBus.getDefault().unregister(this);
         } catch (EventBusException e) {
@@ -48,20 +49,5 @@ public class BaseFragment extends Fragment {
         }
     }
 
-    /**
-     * Add fragment to backstack if backstackname is given.
-     *
-     * @param fragment      - Fragment to display
-     * @param backStackName - Name required to put fragment in backstack
-     */
-    public void replaceFragment(Fragment fragment, String backStackName, int containerId) {
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(containerId, fragment);
-        if (backStackName != null) {
-            ft.addToBackStack(backStackName);
-        }
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
-        ft.commit();
-    }
 
 }

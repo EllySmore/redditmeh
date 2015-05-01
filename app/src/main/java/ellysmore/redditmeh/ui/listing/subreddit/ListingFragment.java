@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -16,8 +17,6 @@ import ellysmore.redditmeh.ui.commons.BaseFragmentWithSwipeRefreshListener;
 import ellysmore.redditmeh.ui.listing.subreddit.adapters.ListingAdapter;
 import ellysmore.redditmeh.ui.listing.subreddit.models.ListingDisplayInfo;
 import ellysmore.redditmeh.ui.listing.subreddit.widgets.Footer;
-import rx.Observable;
-import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 
 public class ListingFragment
@@ -65,7 +64,7 @@ public class ListingFragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.fragment_listing, container, false);
         ButterKnife.inject(this, mRootView);
         setUpAdapter();
@@ -99,6 +98,7 @@ public class ListingFragment
     //endregion
 
     //region API calls
+
     /**
      * This must be fetched first before fetching next set of data.
      */
@@ -123,119 +123,62 @@ public class ListingFragment
     }
 
     private void fetchSubredditListing() {
-        Observable<Listing> observable = NetworkClient.getInstance()
+        NetworkClient.getInstance()
                 .getRedditApiService()
-                .getSubRedditListing(mSubredditName, Constants.LISTING_TYPE_HOT);
-
-        observable.observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Listing>() {
-                    @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        e.printStackTrace();
-                    }
-
-                    @Override
-                    public void onNext(Listing subredditListing) {
-                        mListingDisplayInfo = new ListingDisplayInfo(subredditListing);
-                        mListingAdapter.setData(mListingDisplayInfo);
-                        mListingAdapter.notifyDataSetChanged();
-                        hideContentLoading();
-                        mSwipeRefreshLayout.setRefreshing(false);
-                        mIsFetching = false;
-                    }
-                });
+                .getSubRedditListing(mSubredditName, Constants.LISTING_TYPE_HOT)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::onSuccessFetchingInitialListing, this::onError);
     }
 
     private void fetchNextSubredditListing() {
-        Observable<Listing> observable = NetworkClient.getInstance()
+        NetworkClient.getInstance()
                 .getRedditApiService()
                 .getNextSubredditListing(mSubredditName,
                         Constants.LISTING_TYPE_HOT,
                         mListingDisplayInfo.getAfterTag(),
-                        Constants.LIMIT);
-
-        observable.observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Listing>() {
-                    @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        e.printStackTrace();
-                        hideFooterLoading();
-                    }
-
-                    @Override
-                    public void onNext(Listing subredditListing) {
-                        mListingAdapter.setData(subredditListing);
-                        mListingAdapter.notifyDataSetChanged();
-                        mIsFetching = false;
-                        hideFooterLoading();
-                    }
-                });
+                        Constants.LIMIT)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::onSuccessFetchingNextListing, this::onError);
     }
 
     private void fetchFrontPageListing() {
-        Observable<Listing> observable = NetworkClient.getInstance()
+        NetworkClient.getInstance()
                 .getRedditApiService()
-                .getFrontPageListing(Constants.LISTING_TYPE_HOT);
+                .getFrontPageListing(Constants.LISTING_TYPE_HOT)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::onSuccessFetchingInitialListing, this::onError);
+    }
 
-        observable.observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Listing>() {
-                    @Override
-                    public void onCompleted() {
-                    }
+    private void onSuccessFetchingInitialListing(Listing subredditListing) {
+        mListingDisplayInfo = new ListingDisplayInfo(subredditListing);
+        mListingAdapter.setData(mListingDisplayInfo);
+        mListingAdapter.notifyDataSetChanged();
+        hideContentLoading();
+        mSwipeRefreshLayout.setRefreshing(false);
+        mIsFetching = false;
+    }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        e.printStackTrace();
-                    }
+    private void onSuccessFetchingNextListing(Listing subredditListing) {
+        mListingAdapter.setData(subredditListing);
+        mListingAdapter.notifyDataSetChanged();
+        mIsFetching = false;
+        hideFooterLoading();
+    }
 
-                    @Override
-                    public void onNext(Listing subredditListing) {
-                        mListingDisplayInfo = new ListingDisplayInfo(subredditListing);
-                        mListingAdapter.setData(mListingDisplayInfo);
-                        mListingAdapter.notifyDataSetChanged();
-                        hideContentLoading();
-                        mSwipeRefreshLayout.setRefreshing(false);
-                        mIsFetching = false;
-                    }
-                });
+    private void onError(Throwable error) {
+        Toast.makeText(getActivity(), "SERVER ERROR", Toast.LENGTH_LONG).show();
+        mIsFetching = false;
+        hideContentLoading();
+        hideFooterLoading();
     }
 
     private void fetchNextFrontPageListing() {
-        Observable<Listing> observable = NetworkClient.getInstance()
+        NetworkClient.getInstance()
                 .getRedditApiService()
-                .getNextFrontPageListing(
-                        Constants.LISTING_TYPE_HOT,
-                        mListingDisplayInfo.getAfterTag(),
-                        Constants.LIMIT);
-
-        observable.observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Listing>() {
-                    @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        e.printStackTrace();
-                        hideFooterLoading();
-                    }
-
-                    @Override
-                    public void onNext(Listing subredditListing) {
-                        mListingAdapter.setData(subredditListing);
-                        mListingAdapter.notifyDataSetChanged();
-                        mIsFetching = false;
-                        hideFooterLoading();
-                    }
-                });
+                .getNextFrontPageListing(Constants.LISTING_TYPE_HOT,
+                        mListingDisplayInfo.getAfterTag(), Constants.LIMIT)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::onSuccessFetchingNextListing, this::onError);
     }
     //endregion
 

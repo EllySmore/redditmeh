@@ -29,7 +29,7 @@ public class NavigationDrawerFragment extends Fragment {
     private static final String PARAM_SELECT_POSITION = "PARAM_SELECT_POSITION";
 
     @InjectView(R.id.navigation_list)
-    protected ListView mListView;
+    protected ListView mNavigationList;
 
     private ActionBarDrawerToggle mDrawerToggle;
 
@@ -62,8 +62,8 @@ public class NavigationDrawerFragment extends Fragment {
                 R.layout.fragment_navigation_drawer, container, false);
         ButterKnife.inject(this, mRootView);
         mNavigationListAdapter = new NavigationListAdapter(setUpNavigationDrawer(), true);
-        mListView.setAdapter(mNavigationListAdapter);
-        mListView.setItemChecked(mCurrentSelectedPosition, true);
+        mNavigationList.setAdapter(mNavigationListAdapter);
+        mNavigationList.setItemChecked(mCurrentSelectedPosition, true);
         return mRootView;
     }
 
@@ -71,14 +71,6 @@ public class NavigationDrawerFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(PARAM_SELECT_POSITION, mCurrentSelectedPosition);
-    }
-
-    @OnItemClick(R.id.navigation_list)
-    protected void onNavigationItemClicked(AdapterView<?> parent, View view, int position,
-            long id) {
-        Log.v(TAG, "I am clicked");
-
-        selectItem(position);
     }
 
     public void setUp(DrawerLayout drawerLayout, Toolbar toolbar) {
@@ -105,6 +97,13 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerToggle.syncState();
     }
 
+    @OnItemClick(R.id.navigation_list)
+    protected void onNavigationItemClicked(AdapterView<?> parent, View view, int position,
+            long id) {
+        Log.v(TAG, "I am clicked");
+        selectItem(position);
+    }
+
     private ArrayList<NavItems> setUpNavigationDrawer() {
         ArrayList<NavItems> navItems = new ArrayList<NavItems>();
         navItems.add(NavItems.FRONT_PAGE);
@@ -116,10 +115,9 @@ public class NavigationDrawerFragment extends Fragment {
         return navItems;
     }
 
-
     private void selectItem(int position) {
         mCurrentSelectedPosition = position;
-        mListView.setItemChecked(position, true);
+        mNavigationList.setItemChecked(position, true);
         mCallbacks.onItemClick(mNavigationListAdapter.getItem(position));
         mNavigationListAdapter.notifyDataSetInvalidated();
     }

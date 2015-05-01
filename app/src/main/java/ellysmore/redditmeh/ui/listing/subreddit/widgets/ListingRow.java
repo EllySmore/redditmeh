@@ -1,6 +1,7 @@
 package ellysmore.redditmeh.ui.listing.subreddit.widgets;
 
-import com.squareup.picasso.Picasso;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -8,15 +9,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import ellysmore.redditmeh.Constants;
 import ellysmore.redditmeh.R;
 import ellysmore.redditmeh.api.models.Listing.Data_;
-import ellysmore.redditmeh.util.RoundedTransformation;
+import ellysmore.redditmeh.util.PicassoHelper;
 import ellysmore.redditmeh.util.TimeHelper;
 
 public class ListingRow extends RelativeLayout {
@@ -67,23 +64,18 @@ public class ListingRow extends RelativeLayout {
         loadImage();
     }
 
-    private String getPostTimeDifference(long epochTimeInSeconds){
+    private String getPostTimeDifference(long epochTimeInSeconds) {
         final long epochTimeInMillis = epochTimeInSeconds * 1000;
-        String timeDifference = TimeHelper.getDifference(new DateTime(epochTimeInMillis, DateTimeZone.UTC));
+        String timeDifference = TimeHelper
+                .getDifference(new DateTime(epochTimeInMillis, DateTimeZone.UTC));
         return getResources().getString(R.string.xtime, timeDifference);
     }
 
     public void loadImage() {
         if (mData.isOver18()) {
-            Picasso.with(getContext()).load(R.drawable.redditplaceholder_nsfw)
-                    .transform(new RoundedTransformation(4, 0)).fit().into(mThumbnail);
-        } else if (mData.getThumbnail() == null || mData.getThumbnail().isEmpty() || mData
-                .getThumbnail().equalsIgnoreCase(Constants.SELF)) {
-            Picasso.with(getContext()).load(R.drawable.redditplaceholder)
-                    .transform(new RoundedTransformation(2, 0)).fit().into(mThumbnail);
+            PicassoHelper.loadImage(mThumbnail, getContext(), R.drawable.redditplaceholder_nsfw);
         } else {
-            Picasso.with(getContext()).load(mData.getThumbnail())
-                    .transform(new RoundedTransformation(2, 0)).fit().into(mThumbnail);
+            PicassoHelper.loadImage(mThumbnail, getContext(), mData.getThumbnail());
         }
     }
 
