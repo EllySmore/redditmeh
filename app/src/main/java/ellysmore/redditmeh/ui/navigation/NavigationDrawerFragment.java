@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnItemClick;
-import ellysmore.redditmeh.BuildConfig;
 import ellysmore.redditmeh.R;
 import ellysmore.redditmeh.ui.navigation.adapters.NavigationListAdapter;
 import ellysmore.redditmeh.ui.navigation.models.NavItems;
@@ -109,9 +108,7 @@ public class NavigationDrawerFragment extends Fragment {
         ArrayList<NavItems> navItems = new ArrayList<NavItems>();
         navItems.add(NavItems.FRONT_PAGE);
         navItems.add(NavItems.AWW);
-        if (BuildConfig.DEBUG) {
-            navItems.add(NavItems.FUNNY);
-        }
+        navItems.add(NavItems.FUNNY);
         navItems.add(NavItems.PICS);
         navItems.add(NavItems.PROGRAMMING);
         navItems.add(NavItems.SHOWER_THOUGHTS);

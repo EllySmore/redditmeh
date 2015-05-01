@@ -33,4 +33,12 @@
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Title</item>
         <item name="android:textColor">@color/c1</item>
     </style>
+
+
+    <style name="NavRowStyle">
+        <item name="android:background">@drawable/bg_c1_3_touchstate</item>
+        <item name="android:layout_height">@dimen/row_height</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+    </style>
 </resources>

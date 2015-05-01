@@ -168,6 +168,7 @@ public class ListingFragment
     private void onError(Throwable error) {
         Toast.makeText(getActivity(), "SERVER ERROR", Toast.LENGTH_LONG).show();
         mIsFetching = false;
+        hideContentLoading();
         hideFooterLoading();
     }
 
