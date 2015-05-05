@@ -1,4 +1,4 @@
-package ellysmore.redditmeh.ui.listing.subreddit;
+package ellysmore.redditmeh.ui.listing;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,9 +14,9 @@ import ellysmore.redditmeh.R;
 import ellysmore.redditmeh.api.NetworkClient;
 import ellysmore.redditmeh.api.models.Listing.Listing;
 import ellysmore.redditmeh.ui.commons.BaseFragmentWithSwipeRefreshListener;
-import ellysmore.redditmeh.ui.listing.subreddit.adapters.ListingAdapter;
-import ellysmore.redditmeh.ui.listing.subreddit.models.ListingDisplayInfo;
-import ellysmore.redditmeh.ui.listing.subreddit.widgets.Footer;
+import ellysmore.redditmeh.ui.listing.adapters.ListingAdapter;
+import ellysmore.redditmeh.ui.listing.models.ListingDisplayInfo;
+import ellysmore.redditmeh.ui.listing.widgets.Footer;
 import rx.android.schedulers.AndroidSchedulers;
 
 public class ListingFragment

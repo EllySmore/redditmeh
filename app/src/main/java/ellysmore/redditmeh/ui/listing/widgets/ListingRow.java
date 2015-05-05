@@ -1,4 +1,4 @@
-package ellysmore.redditmeh.ui.listing.subreddit.widgets;
+package ellysmore.redditmeh.ui.listing.widgets;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -13,6 +13,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import ellysmore.redditmeh.R;
 import ellysmore.redditmeh.api.models.Listing.Data_;
+import ellysmore.redditmeh.ui.widgets.FlatButton;
 import ellysmore.redditmeh.util.PicassoHelper;
 import ellysmore.redditmeh.util.TimeHelper;
 

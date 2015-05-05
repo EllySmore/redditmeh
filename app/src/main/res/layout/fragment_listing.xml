@@ -25,7 +25,7 @@
             android:divider="@null"
             android:dividerHeight="0dp" />
 
-        <ellysmore.redditmeh.ui.listing.subreddit.widgets.Footer
+        <ellysmore.redditmeh.ui.listing.widgets.Footer
             android:id="@+id/footer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import ellysmore.redditmeh.R;
 import ellysmore.redditmeh.ui.navigation.models.NavItems;
-import ellysmore.redditmeh.ui.navigation.widgets.RowNavigation;
+import ellysmore.redditmeh.ui.navigation.widgets.NavigationItemRow;
 
 public class NavigationListAdapter extends BaseAdapter {
 
@@ -39,10 +39,10 @@ public class NavigationListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        RowNavigation rowView = (RowNavigation) convertView;
+        NavigationItemRow rowView = (NavigationItemRow) convertView;
         if (convertView == null) {
             LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-            rowView = (RowNavigation) layoutInflater
+            rowView = (NavigationItemRow) layoutInflater
                     .inflate(R.layout.row_navigation_impl, parent, false);
         }
         rowView.updateUI(mItems.get(position));
