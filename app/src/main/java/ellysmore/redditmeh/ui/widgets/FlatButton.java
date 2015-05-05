@@ -1,4 +1,4 @@
-package ellysmore.redditmeh.ui.listing.widgets;
+package ellysmore.redditmeh.ui.widgets;
 
 import android.content.Context;
 import android.content.res.ColorStateList;

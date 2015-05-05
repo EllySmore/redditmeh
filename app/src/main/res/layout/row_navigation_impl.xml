@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ellysmore.redditmeh.ui.navigation.widgets.RowNavigation
+<ellysmore.redditmeh.ui.navigation.widgets.NavigationItemRow
         style="@style/NavRowStyle"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"/>

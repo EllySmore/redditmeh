@@ -12,7 +12,7 @@ import butterknife.InjectView;
 import ellysmore.redditmeh.R;
 import ellysmore.redditmeh.ui.navigation.models.NavItems;
 
-public class RowNavigation extends RelativeLayout implements Checkable {
+public class NavigationItemRow extends RelativeLayout implements Checkable {
 
     @InjectView(R.id.icon)
     protected ImageView mIcon;
@@ -22,15 +22,15 @@ public class RowNavigation extends RelativeLayout implements Checkable {
 
     private NavItems mNavItem;
 
-    public RowNavigation(Context context) {
+    public NavigationItemRow(Context context) {
         this(context, null);
     }
 
-    public RowNavigation(Context context, AttributeSet attrs) {
+    public NavigationItemRow(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public RowNavigation(Context context, AttributeSet attrs, int defStyleAttr) {
+    public NavigationItemRow(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         inflate(context, R.layout.row_navigation, this);
         ButterKnife.inject(this);
@@ -57,6 +57,6 @@ public class RowNavigation extends RelativeLayout implements Checkable {
 
     @Override
     public void toggle() {
-
+        //noop
     }
 }
