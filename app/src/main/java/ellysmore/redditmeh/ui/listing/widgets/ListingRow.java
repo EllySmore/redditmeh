@@ -1,4 +1,4 @@
-package ellysmore.redditmeh.ui.listing.subreddit.widgets;
+package ellysmore.redditmeh.ui.listing.widgets;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;

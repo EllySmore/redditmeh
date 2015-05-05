@@ -7,7 +7,7 @@ import android.support.v7.widget.Toolbar;
 import ellysmore.redditmeh.R;
 import ellysmore.redditmeh.ui.commons.BaseActivity;
 import ellysmore.redditmeh.ui.commons.BaseFragmentWithSwipeRefreshListener;
-import ellysmore.redditmeh.ui.listing.subreddit.ListingFragment;
+import ellysmore.redditmeh.ui.listing.ListingFragment;
 import ellysmore.redditmeh.ui.navigation.models.NavItems;
 
 public class NavigationActivity extends BaseActivity implements

@@ -1,4 +1,4 @@
-package ellysmore.redditmeh.ui.listing.subreddit.models;
+package ellysmore.redditmeh.ui.listing.models;
 
 import java.util.List;
 

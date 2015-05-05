@@ -74,7 +74,7 @@
                     android:textSize="@dimen/listing_submitted_textsize"
                     tools:text="Subreddit Time by Author" />
 
-                <ellysmore.redditmeh.ui.listing.subreddit.widgets.FlatButton
+                <ellysmore.redditmeh.ui.listing.widgets.FlatButton
                     android:id="@+id/flatbutton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

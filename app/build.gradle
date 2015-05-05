@@ -59,5 +59,4 @@ dependencies {
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'com.netflix.rxjava:rxjava-android:0.20.7'
     compile 'joda-time:joda-time:2.7'
-    compile 'com.squareup:android-times-square:1.6.0@aar'
 }
