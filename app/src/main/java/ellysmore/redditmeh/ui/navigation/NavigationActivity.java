@@ -1,14 +1,14 @@
 package ellysmore.redditmeh.ui.navigation;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 
 import ellysmore.redditmeh.R;
 import ellysmore.redditmeh.ui.commons.BaseActivity;
-import ellysmore.redditmeh.ui.commons.BaseFragmentWithSwipeRefreshListener;
 import ellysmore.redditmeh.ui.listing.ListingFragment;
-import ellysmore.redditmeh.ui.navigation.models.NavItems;
+import ellysmore.redditmeh.ui.models.SubredditType;
 
 public class NavigationActivity extends BaseActivity implements
         NavigationDrawerFragment.NavigationSelectCallback {
@@ -31,10 +31,10 @@ public class NavigationActivity extends BaseActivity implements
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mNavigationDrawerFragment.setUp(mDrawerLayout, mToolbar);
+        //Initial fragment display frontpage
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(getContainerId(),
-                            ListingFragment.newInstance())
+                    .add(getContainerId(), ListingFragment.newInstance(SubredditType.FRONT_PAGE))
                     .commit();
         }
     }
@@ -44,38 +44,12 @@ public class NavigationActivity extends BaseActivity implements
     }
 
     @Override
-    public void onItemClick(NavItems navItems) {
-        BaseFragmentWithSwipeRefreshListener fragment = null;
-        switch (navItems) {
-            case FRONT_PAGE:
-                fragment = ListingFragment.newInstance();
-                break;
-            case AWW:
-                fragment = ListingFragment
-                        .newInstance(getString(R.string.aww));
-                break;
-            case FUNNY:
-                fragment = ListingFragment
-                        .newInstance(getString(R.string.funny));
-                break;
-            case PICS:
-                fragment = ListingFragment
-                        .newInstance(getString(R.string.pics));
-                break;
-            case PROGRAMMING:
-                fragment = ListingFragment
-                        .newInstance(getString(R.string.programming));
-                break;
-            case SHOWER_THOUGHTS:
-                fragment = ListingFragment
-                        .newInstance(getString(R.string.shower_thoughts));
-                break;
-            default:
-                break;
-        }
+    public void onItemClick(SubredditType subredditType) {
+        Fragment fragment = null;
+        fragment = ListingFragment.newInstance(subredditType);
         mDrawerLayout.closeDrawers();
         if (fragment != null) {
-            getSupportActionBar().setTitle(navItems.getTitleResId());
+            getSupportActionBar().setTitle(subredditType.toString());
             replaceFragment(fragment, null, getContainerId());
         }
     }

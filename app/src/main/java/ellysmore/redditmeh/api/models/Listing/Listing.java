@@ -1,20 +1,26 @@
 package ellysmore.redditmeh.api.models.Listing;
 
+import com.google.gson.annotations.SerializedName;
+
 import ellysmore.redditmeh.api.models.BaseModel;
 
+/**
+ * Top parent data
+ */
 public class Listing extends BaseModel {
 
     //TODO: Some fields from response come back as different datatype.
     private String kind;
 
-    private Data data;
+    @SerializedName("data")
+    private Children children;
 
     public String getKind() {
         return kind;
     }
 
-    public Data getData() {
-        return data;
+    public Children getChildren() {
+        return children;
     }
 
     @Override
@@ -29,7 +35,7 @@ public class Listing extends BaseModel {
 
         Listing listing = (Listing) o;
 
-        if (data != null ? !data.equals(listing.data) : listing.data != null) {
+        if (children != null ? !children.equals(listing.children) : listing.children != null) {
             return false;
         }
         if (kind != null ? !kind.equals(listing.kind) : listing.kind != null) {
@@ -42,7 +48,7 @@ public class Listing extends BaseModel {
     @Override
     public int hashCode() {
         int result = kind != null ? kind.hashCode() : 0;
-        result = 31 * result + (data != null ? data.hashCode() : 0);
+        result = 31 * result + (children != null ? children.hashCode() : 0);
         return result;
     }
 
@@ -50,7 +56,7 @@ public class Listing extends BaseModel {
     public String toString() {
         return "Listing{" +
                 "kind='" + kind + '\'' +
-                ", data=" + data +
+                ", data=" + children +
                 '}';
     }
 }

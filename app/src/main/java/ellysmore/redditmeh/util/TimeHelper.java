@@ -20,8 +20,13 @@ public final class TimeHelper {
      * @param startTime a {@link org.joda.time.DateTime} object representing the start time using {@link org.joda.time.DateTimeZone#UTC}
      * @return a {@link java.lang.String} representing the time difference in a human readable format
      */
-    public static String getDifference(DateTime startTime) {
 
+    public static String getDifference(long startTime) {
+        DateTime startedTime = new DateTime(startTime);
+        return getDifference(startedTime, new DateTime().withZone(startedTime.getZone()));
+    }
+
+    public static String getDifference(DateTime startTime) {
         return getDifference(startTime, new DateTime().withZone(startTime.getZone()));
     }
 

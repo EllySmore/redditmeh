@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +14,12 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnItemClick;
 import ellysmore.redditmeh.R;
 import ellysmore.redditmeh.ui.navigation.adapters.NavigationListAdapter;
-import ellysmore.redditmeh.ui.navigation.models.NavItems;
+import ellysmore.redditmeh.ui.models.SubredditType;
 
 public class NavigationDrawerFragment extends Fragment {
 
@@ -28,7 +27,7 @@ public class NavigationDrawerFragment extends Fragment {
 
     private static final String PARAM_SELECT_POSITION = "PARAM_SELECT_POSITION";
 
-    @InjectView(R.id.navigation_list)
+    @Bind(R.id.navigation_list)
     protected ListView mNavigationList;
 
     private ActionBarDrawerToggle mDrawerToggle;
@@ -60,7 +59,7 @@ public class NavigationDrawerFragment extends Fragment {
             Bundle savedInstanceState) {
         mRootView = inflater.inflate(
                 R.layout.fragment_navigation_drawer, container, false);
-        ButterKnife.inject(this, mRootView);
+        ButterKnife.bind(this, mRootView);
         mNavigationListAdapter = new NavigationListAdapter(setUpNavigationDrawer(), true);
         mNavigationList.setAdapter(mNavigationListAdapter);
         mNavigationList.setItemChecked(mCurrentSelectedPosition, true);
@@ -98,20 +97,18 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     @OnItemClick(R.id.navigation_list)
-    protected void onNavigationItemClicked(AdapterView<?> parent, View view, int position,
-            long id) {
-        Log.v(TAG, "I am clicked");
-        selectItem(position);
+    protected void onNavigationItemClicked(AdapterView<?> parent, View view, int pos, long id) {
+        selectItem(pos);
     }
 
-    private ArrayList<NavItems> setUpNavigationDrawer() {
-        ArrayList<NavItems> navItems = new ArrayList<NavItems>();
-        navItems.add(NavItems.FRONT_PAGE);
-        navItems.add(NavItems.AWW);
-        navItems.add(NavItems.FUNNY);
-        navItems.add(NavItems.PICS);
-        navItems.add(NavItems.PROGRAMMING);
-        navItems.add(NavItems.SHOWER_THOUGHTS);
+    private ArrayList<SubredditType> setUpNavigationDrawer() {
+        ArrayList<SubredditType> navItems = new ArrayList<SubredditType>();
+        navItems.add(SubredditType.FRONT_PAGE);
+        navItems.add(SubredditType.AWW);
+        navItems.add(SubredditType.FUNNY);
+        navItems.add(SubredditType.PICS);
+        navItems.add(SubredditType.PROGRAMMING);
+        navItems.add(SubredditType.SHOWER_THOUGHTS);
         return navItems;
     }
 
@@ -122,8 +119,8 @@ public class NavigationDrawerFragment extends Fragment {
         mNavigationListAdapter.notifyDataSetInvalidated();
     }
 
-    public static interface NavigationSelectCallback {
+    public interface NavigationSelectCallback {
 
-        void onItemClick(NavItems navItems);
+        void onItemClick(SubredditType subredditType);
     }
 }

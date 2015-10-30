@@ -9,16 +9,16 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import ellysmore.redditmeh.R;
 
 public class FlatButton extends RelativeLayout {
 
-    @InjectView(R.id.icon)
+    @Bind(R.id.icon)
     protected ImageView mIcon;
 
-    @InjectView(R.id.text)
+    @Bind(R.id.text)
     protected TextView mText;
 
     public FlatButton(Context context) {
@@ -32,7 +32,7 @@ public class FlatButton extends RelativeLayout {
     public FlatButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         inflate(context, R.layout.button, this);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         initAttrs(context, attrs);
     }
 

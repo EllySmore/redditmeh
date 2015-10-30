@@ -9,27 +9,15 @@ import rx.Observable;
 
 public interface RedditApiService {
 
-    @GET(ApiPath.SUBREDDIT_LISTING)
+    @GET("{path}/{listing}.json")
     Observable<Listing> getSubRedditListing(
-            @Path("SUBREDDIT_NAME") String subredditName,
-            @Path("LISTING_TYPE") String listingType
+            @Path("path") String path,
+            @Path("listing") String listing
     );
 
     @GET(ApiPath.SUBREDDIT_LISTING)
     Observable<Listing> getNextSubredditListing(
-            @Path("SUBREDDIT_NAME") String subredditName,
-            @Path("LISTING_TYPE") String listingType,
-            @Query("after") String afterFullName,
-            @Query("limit") int limit
-    );
-
-    @GET(ApiPath.FRONT_PAGE_LISTING)
-    Observable<Listing> getFrontPageListing(
-            @Path("LISTING_TYPE") String listingType
-    );
-
-    @GET(ApiPath.FRONT_PAGE_LISTING)
-    Observable<Listing> getNextFrontPageListing(
+            @Path(value = "SUBREDDIT_NAME", encoded = false) String subredditName,
             @Path("LISTING_TYPE") String listingType,
             @Query("after") String afterFullName,
             @Query("limit") int limit

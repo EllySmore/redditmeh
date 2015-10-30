@@ -15,3 +15,36 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+# Rx
+-keep class rx.internal.**
+-dontwarn rx.**
+
+# Square
+-keep class com.squareup.okhttp.** { *; }
+-keep interface com.squareup.okhttp.** { *; }
+-keep class okio.**
+-dontwarn com.squareup.okhttp.**
+
+# Retrolamda
+-dontwarn java.lang.invoke.*
+
+# Retrofit
+-keep class retrofit.** { *; }
+-keepclasseswithmembers class * {
+    @retrofit.http.* <methods>;
+}
+-dontwarn retrofit.**
+
+# Joda
+-keep class org.joda.**
+-dontwarn org.joda.**
+
+# Support library
+-dontwarn android.support.v4.**
+-keep class android.support.v4.** { *; }
+-dontwarn android.support.v7.**
+-keep class !android.support.v7.internal.view.menu.MenuBuilder, !android.support.v7.internal.view.menu.SubMenuBuilder, android.support.v7.** { *; }
+-keep interface android.support.v7.** { *; }
+
+

@@ -18,14 +18,14 @@
             android:layout_centerInParent="true"
             android:visibility="gone" />
 
-        <ListView
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@null"
             android:dividerHeight="0dp" />
 
-        <ellysmore.redditmeh.ui.listing.widgets.Footer
+        <ellysmore.redditmeh.ui.widgets.Footer
             android:id="@+id/footer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

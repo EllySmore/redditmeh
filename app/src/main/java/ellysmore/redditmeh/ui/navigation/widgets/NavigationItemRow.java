@@ -7,20 +7,18 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import ellysmore.redditmeh.R;
-import ellysmore.redditmeh.ui.navigation.models.NavItems;
+import ellysmore.redditmeh.ui.models.SubredditType;
 
 public class NavigationItemRow extends RelativeLayout implements Checkable {
 
-    @InjectView(R.id.icon)
+    @Bind(R.id.icon)
     protected ImageView mIcon;
 
-    @InjectView(R.id.title)
+    @Bind(R.id.title)
     protected TextView mTitle;
-
-    private NavItems mNavItem;
 
     public NavigationItemRow(Context context) {
         this(context, null);
@@ -33,12 +31,12 @@ public class NavigationItemRow extends RelativeLayout implements Checkable {
     public NavigationItemRow(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         inflate(context, R.layout.row_navigation, this);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
     }
 
-    public void updateUI(NavItems navItem) {
+    public void updateUI(SubredditType navItem) {
         mIcon.setImageDrawable(getResources().getDrawable(navItem.getIconResId()));
-        mTitle.setText(getResources().getString(navItem.getTitleResId()));
+        mTitle.setText(navItem.toString());
     }
 
     @Override

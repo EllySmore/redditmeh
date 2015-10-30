@@ -1,8 +1,16 @@
 package ellysmore.redditmeh.api;
 
 import ellysmore.redditmeh.Config;
+import ellysmore.redditmeh.api.models.Listing.Listing;
 import ellysmore.redditmeh.api.services.RedditApiService;
-import retrofit.RestAdapter;
+import ellysmore.redditmeh.ui.models.ListingType;
+import ellysmore.redditmeh.ui.models.SubredditType;
+import retrofit.GsonConverterFactory;
+import retrofit.Retrofit;
+import retrofit.RxJavaCallAdapterFactory;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class NetworkClient {
 
@@ -11,9 +19,14 @@ public class NetworkClient {
     private RedditApiService mRedditApiService;
 
     private NetworkClient() {
-        mRedditApiService = new RestAdapter.Builder()
-                .setEndpoint(Config.getEndPoint()).setLogLevel(RestAdapter.LogLevel.FULL)
-                .build().create(RedditApiService.class);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Config.getEndPoint())
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        mRedditApiService = retrofit.create(RedditApiService.class);
+
     }
 
     public static NetworkClient getInstance() {
@@ -23,7 +36,9 @@ public class NetworkClient {
         return mInstance;
     }
 
-    public RedditApiService getRedditApiService() {
-        return mRedditApiService;
+    public Observable<Listing> getListing(SubredditType subreddit, ListingType listingType) {
+        return mRedditApiService.getSubRedditListing(subreddit.getPath(), listingType.toString())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io());
     }
 }

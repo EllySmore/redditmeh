@@ -1,15 +1,17 @@
 package ellysmore.redditmeh.api.models.Listing;
 
-import java.util.ArrayList;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 import ellysmore.redditmeh.api.models.BaseModel;
 
-public class Data extends BaseModel {
+public class Children extends BaseModel {
 
     private String modhash;
 
-    private List<Child> children = new ArrayList<Child>();
+    @SerializedName("children")
+    private List<Post> data;
 
     private String after;
 
@@ -19,8 +21,8 @@ public class Data extends BaseModel {
         return modhash;
     }
 
-    public List<Child> getChildren() {
-        return children;
+    public List<Post> getPosts() {
+        return data;
     }
 
     public String getAfter() {
@@ -40,18 +42,18 @@ public class Data extends BaseModel {
             return false;
         }
 
-        Data data = (Data) o;
+        Children children = (Children) o;
 
-        if (after != null ? !after.equals(data.after) : data.after != null) {
+        if (after != null ? !after.equals(children.after) : children.after != null) {
             return false;
         }
-        if (before != null ? !before.equals(data.before) : data.before != null) {
+        if (before != null ? !before.equals(children.before) : children.before != null) {
             return false;
         }
-        if (children != null ? !children.equals(data.children) : data.children != null) {
+        if (data != null ? !data.equals(children.data) : children.data != null) {
             return false;
         }
-        if (modhash != null ? !modhash.equals(data.modhash) : data.modhash != null) {
+        if (modhash != null ? !modhash.equals(children.modhash) : children.modhash != null) {
             return false;
         }
 
@@ -61,7 +63,7 @@ public class Data extends BaseModel {
     @Override
     public int hashCode() {
         int result = modhash != null ? modhash.hashCode() : 0;
-        result = 31 * result + (children != null ? children.hashCode() : 0);
+        result = 31 * result + (data != null ? data.hashCode() : 0);
         result = 31 * result + (after != null ? after.hashCode() : 0);
         result = 31 * result + (before != null ? before.hashCode() : 0);
         return result;
@@ -71,7 +73,7 @@ public class Data extends BaseModel {
     public String toString() {
         return "Data{" +
                 "modhash='" + modhash + '\'' +
-                ", children=" + children +
+                ", children=" + data +
                 ", after='" + after + '\'' +
                 ", before='" + before + '\'' +
                 '}';

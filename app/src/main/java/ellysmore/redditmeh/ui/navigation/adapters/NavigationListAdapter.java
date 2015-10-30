@@ -8,16 +8,16 @@ import android.widget.BaseAdapter;
 import java.util.ArrayList;
 
 import ellysmore.redditmeh.R;
-import ellysmore.redditmeh.ui.navigation.models.NavItems;
+import ellysmore.redditmeh.ui.models.SubredditType;
 import ellysmore.redditmeh.ui.navigation.widgets.NavigationItemRow;
 
 public class NavigationListAdapter extends BaseAdapter {
 
-    private ArrayList<NavItems> mItems = new ArrayList<>();
+    private ArrayList<SubredditType> mItems = new ArrayList<>();
 
     private boolean mShowShortList = true;
 
-    public NavigationListAdapter(ArrayList<NavItems> mNavItems, boolean showShortList) {
+    public NavigationListAdapter(ArrayList<SubredditType> mNavItems, boolean showShortList) {
         this.mItems = mNavItems;
         mShowShortList = showShortList;
     }
@@ -28,7 +28,7 @@ public class NavigationListAdapter extends BaseAdapter {
     }
 
     @Override
-    public NavItems getItem(int position) {
+    public SubredditType getItem(int position) {
         return mItems.get(position);
     }
 

@@ -1,54 +1,57 @@
 package ellysmore.redditmeh.ui.listing;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
-import ellysmore.redditmeh.Constants;
 import ellysmore.redditmeh.R;
 import ellysmore.redditmeh.api.NetworkClient;
 import ellysmore.redditmeh.api.models.Listing.Listing;
 import ellysmore.redditmeh.ui.commons.BaseFragmentWithSwipeRefreshListener;
-import ellysmore.redditmeh.ui.listing.adapters.ListingAdapter;
-import ellysmore.redditmeh.ui.listing.models.ListingDisplayInfo;
-import ellysmore.redditmeh.ui.listing.widgets.Footer;
-import rx.android.schedulers.AndroidSchedulers;
+import ellysmore.redditmeh.ui.commons.DividerItemDecoration;
+import ellysmore.redditmeh.ui.listing.adapters.ListingRecyclerAdapter;
+import ellysmore.redditmeh.ui.models.ListingType;
+import ellysmore.redditmeh.ui.models.SubredditType;
+import ellysmore.redditmeh.ui.widgets.Footer;
 
-public class ListingFragment
-        extends BaseFragmentWithSwipeRefreshListener {
+public class ListingFragment extends BaseFragmentWithSwipeRefreshListener {
 
     private static final String TAG = ListingFragment.class.getSimpleName();
 
     private static final String PARAM_SUBREDDIT_NAME = "PARAM_SUBREDDIT_NAME";
 
-    @InjectView(R.id.progress_bar)
+    @Bind(R.id.progress_bar)
     protected ProgressBar mProgressBar;
 
-    @InjectView(R.id.footer)
+
+    @Bind(R.id.swipe_container)
+    protected SwipeRefreshLayout mSwipeRefreshLayout;
+
+    @Bind(R.id.footer)
     protected Footer mFooter;
+
+    @Bind(R.id.list)
+    protected RecyclerView mRecyclerView;
 
     private View mRootView;
 
-    private String mSubredditName;
+    private SubredditType mSubredditName;
 
-    private ListingAdapter mListingAdapter;
+    private ListingRecyclerAdapter mAdapter;
 
-    private ListingDisplayInfo mListingDisplayInfo;
-
-    public static ListingFragment newInstance() {
-        return ListingFragment.newInstance(null);
-    }
-
-    public static ListingFragment newInstance(String subredditName) {
-        ListingFragment
-                listingFragment = new ListingFragment();
+    public static ListingFragment newInstance(SubredditType type) {
+        ListingFragment listingFragment = new ListingFragment();
         Bundle bundle = new Bundle();
-        bundle.putString(PARAM_SUBREDDIT_NAME, subredditName);
+        bundle.putString(PARAM_SUBREDDIT_NAME, type.toString());
         listingFragment.setArguments(bundle);
         return listingFragment;
     }
@@ -58,149 +61,70 @@ public class ListingFragment
         super.onCreate(savedInstanceState);
         Bundle extras = getArguments();
         if (extras != null) {
-            mSubredditName = extras.getString(PARAM_SUBREDDIT_NAME, null);
+            mSubredditName = SubredditType.getType(extras.getString(PARAM_SUBREDDIT_NAME, null));
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.fragment_listing, container, false);
-        ButterKnife.inject(this, mRootView);
-        setUpAdapter();
-        setUpSwipeRefreshLayout();
-        setUpListScrollListener();
-        fetchInitialListing();
+        ButterKnife.bind(this, mRootView);
+        setUpSwipeRefreshColorScheme(mSwipeRefreshLayout);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mAdapter = new ListingRecyclerAdapter(getActivity());
+        mRecyclerView.setAdapter(mAdapter);
+        onRefresh();
         return mRootView;
-    }
-
-    @Override
-    public void reachBottomOfList() {
-        fetchNextListing();
     }
 
     @Override
     public void onRefresh() {
         super.onRefresh();
-        fetchInitialListing();
+        fetchListing();
     }
-
-    //region SetUp
-    private void setUpAdapter() {
-        mListingAdapter = new ListingAdapter();
-        mList.setAdapter(mListingAdapter);
-    }
-
-    private void setUpSwipeRefreshLayout() {
-        mSwipeRefreshLayout.setOnRefreshListener(this);
-        setUpSwipeRefreshColorScheme();
-    }
-    //endregion
-
-    //region API calls
 
     /**
      * This must be fetched first before fetching next set of data.
      */
-    private void fetchInitialListing() {
-        mIsFetching = true;
-        showContentLoading();
-        if (mSubredditName == null) {
-            fetchFrontPageListing();
-        } else {
-            fetchSubredditListing();
-        }
-    }
-
-    private void fetchNextListing() {
-        mIsFetching = true;
-        showFooterLoading();
-        if (mSubredditName == null) {
-            fetchNextFrontPageListing();
-        } else {
-            fetchNextSubredditListing();
-        }
-    }
-
-    private void fetchSubredditListing() {
-        NetworkClient.getInstance()
-                .getRedditApiService()
-                .getSubRedditListing(mSubredditName, Constants.LISTING_TYPE_HOT)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onSuccessFetchingInitialListing, this::onError);
-    }
-
-    private void fetchNextSubredditListing() {
-        NetworkClient.getInstance()
-                .getRedditApiService()
-                .getNextSubredditListing(mSubredditName,
-                        Constants.LISTING_TYPE_HOT,
-                        mListingDisplayInfo.getAfterTag(),
-                        Constants.LIMIT)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onSuccessFetchingNextListing, this::onError);
-    }
-
-    private void fetchFrontPageListing() {
-        NetworkClient.getInstance()
-                .getRedditApiService()
-                .getFrontPageListing(Constants.LISTING_TYPE_HOT)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onSuccessFetchingInitialListing, this::onError);
+    private void fetchListing() {
+        NetworkClient.getInstance().getListing(mSubredditName, ListingType.HOT).subscribe(
+                listing -> {
+                    Log.v("eee", "listing: " + listing);
+                    mAdapter.setPosts(listing.getChildren().getPosts());
+                    mAdapter.notifyDataSetChanged();
+                }, throwable -> {
+                    Toast.makeText(getActivity(), throwable.getMessage(), Toast.LENGTH_SHORT)
+                            .show();
+                });
     }
 
     private void onSuccessFetchingInitialListing(Listing subredditListing) {
-        mListingDisplayInfo = new ListingDisplayInfo(subredditListing);
-        mListingAdapter.setData(mListingDisplayInfo);
-        mListingAdapter.notifyDataSetChanged();
-        hideContentLoading();
-        mSwipeRefreshLayout.setRefreshing(false);
-        mIsFetching = false;
+
     }
 
     private void onSuccessFetchingNextListing(Listing subredditListing) {
-        mListingAdapter.setData(subredditListing);
-        mListingAdapter.notifyDataSetChanged();
-        mIsFetching = false;
-        hideFooterLoading();
+
     }
 
     private void onError(Throwable error) {
-        Toast.makeText(getActivity(), "SERVER ERROR", Toast.LENGTH_LONG).show();
-        mIsFetching = false;
-        hideContentLoading();
-        hideFooterLoading();
+
     }
 
-    private void fetchNextFrontPageListing() {
-        NetworkClient.getInstance()
-                .getRedditApiService()
-                .getNextFrontPageListing(Constants.LISTING_TYPE_HOT,
-                        mListingDisplayInfo.getAfterTag(), Constants.LIMIT)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onSuccessFetchingNextListing, this::onError);
-    }
-    //endregion
-
-    //region ToggleViews
     private void showContentLoading() {
-        mList.setVisibility(View.GONE);
-        mProgressBar.setVisibility(View.VISIBLE);
+
     }
 
     private void hideContentLoading() {
-        mList.setVisibility(View.VISIBLE);
-        mProgressBar.setVisibility(View.GONE);
+
     }
 
     private void showFooterLoading() {
-        mFooter.setVisibility(View.VISIBLE);
-        mFooter.showLoading();
+
     }
 
     private void hideFooterLoading() {
-        mFooter.setVisibility(View.INVISIBLE);
-        mFooter.hideLoading();
+        ;
     }
-    //endregion
 }

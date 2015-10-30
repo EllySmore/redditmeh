@@ -2,17 +2,17 @@ package ellysmore.redditmeh.api.models.Listing;
 
 import ellysmore.redditmeh.api.models.BaseModel;
 
-public class Child extends BaseModel {
+public class Post extends BaseModel {
 
     private String kind;
 
-    private Data_ data;
+    private PostData data;
 
     public String getKind() {
         return kind;
     }
 
-    public Data_ getData() {
+    public PostData getData() {
         return data;
     }
 
@@ -25,12 +25,12 @@ public class Child extends BaseModel {
             return false;
         }
 
-        Child child = (Child) o;
+        Post post = (Post) o;
 
-        if (data != null ? !data.equals(child.data) : child.data != null) {
+        if (data != null ? !data.equals(post.data) : post.data != null) {
             return false;
         }
-        if (kind != null ? !kind.equals(child.kind) : child.kind != null) {
+        if (kind != null ? !kind.equals(post.kind) : post.kind != null) {
             return false;
         }
 
