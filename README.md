@@ -4,18 +4,30 @@ redditmeh
 
 Android app that display reddit listings.
 
+Updated on 10/31/2015:
+- Update 3rd party libs
+- Switched from ListView to RecyclerView
+- Proguard Rules
+- Empty State
+- Added post ranking categories
+
+Upcoming patch
+- Pagination does not work atm.
+- TimeHelper doesn't display short time.
+
 Updated on 3/27/2015:
 - Pagination! You betcha :D
 
-WIP.
+**WIP**
 Currently working on:
 - Caching and Persisting data
 - StaggeredGridView for certain subreddits
 - Showing failed connection screen via croutons
 - Allowing user login
 
-<img src="http://i1314.photobucket.com/albums/t572/awula333/s2_zps4693c0bf.png" width="240px" height="400px" border="0" alt=" photo s2_zps4693c0bf.png"/>
-<img src="http://i1314.photobucket.com/albums/t572/awula333/new_screen_zpsbzxwmdim.png" width="240px" height="400px" border="0" alt=" photo s1_zps6da13cd3.png"/>
+<img src="https://raw.githubusercontent.com/EllySmore/redditmeh/master/assets/1_10.png" width="240" height="480">
+<img src="https://raw.githubusercontent.com/EllySmore/redditmeh/master/assets/empty_state.png" width="240" height="480">
+
 
 New Launcher Icon based off from cat icon in japanese pack.
 
