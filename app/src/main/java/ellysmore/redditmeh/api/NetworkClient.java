@@ -19,14 +19,12 @@ public class NetworkClient {
     private RedditApiService mRedditApiService;
 
     private NetworkClient() {
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Config.getEndPoint())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         mRedditApiService = retrofit.create(RedditApiService.class);
-
     }
 
     public static NetworkClient getInstance() {
@@ -37,7 +35,7 @@ public class NetworkClient {
     }
 
     public Observable<Listing> getListing(SubredditType subreddit, ListingType listingType) {
-        return mRedditApiService.getSubRedditListing(subreddit.getPath(), listingType.toString())
+        return mRedditApiService.getSubRedditListing(subreddit.getPath(), listingType.getPath())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io());
     }

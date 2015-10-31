@@ -13,10 +13,13 @@ public class PicassoHelper {
 
     public static void loadImage(ImageView iv, Context context, String url) {
         if (url == null || url.isEmpty()) {
-            Picasso.with(context).load(placeHolderResId).transform(new RoundedTransformation(4, 0))
+            Picasso.with(context).load(placeHolderResId)
+                    .transform(new RoundedTransformation(4, 0))
                     .fit().into(iv);
         } else {
-            Picasso.with(context).load(url).transform(new RoundedTransformation(4, 0))
+            Picasso.with(context)
+                    .load(url)
+                    .transform(new RoundedTransformation(4, 0))
                     .fit().into(iv);
         }
     }

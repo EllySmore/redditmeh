@@ -1,17 +1,12 @@
 package ellysmore.redditmeh.ui.commons;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import de.greenrobot.event.EventBus;
-import de.greenrobot.event.EventBusException;
-
-public class BaseFragment extends Fragment {
+public class BaseFragment extends android.support.v4.app.Fragment {
 
     private String TAG = this.getClass().getSimpleName();
 
@@ -26,10 +21,6 @@ public class BaseFragment extends Fragment {
     public void onStart() {
         super.onStart();
         Log.v(TAG, "OnStart");
-        try {
-            EventBus.getDefault().register(this);
-        } catch (EventBusException e) {
-        }
     }
 
     @Override
@@ -42,12 +33,6 @@ public class BaseFragment extends Fragment {
     public void onStop() {
         super.onStop();
         Log.v(TAG, "onStop");
-        try {
-            EventBus.getDefault().unregister(this);
-        } catch (EventBusException e) {
-
-        }
     }
-
 
 }

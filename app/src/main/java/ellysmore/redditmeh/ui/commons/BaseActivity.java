@@ -50,4 +50,13 @@ public class BaseActivity extends AppCompatActivity {
         ft.commit();
     }
 
+    public void replaceFragment(android.support.v4.app.Fragment fragment, String backStackName, int containerId) {
+        android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(containerId, fragment);
+        if (backStackName != null) {
+            ft.addToBackStack(backStackName);
+        }
+        ft.commit();
+    }
+
 }

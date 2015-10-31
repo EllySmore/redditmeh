@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,6 @@ import ellysmore.redditmeh.R;
 import ellysmore.redditmeh.api.NetworkClient;
 import ellysmore.redditmeh.api.models.Listing.Listing;
 import ellysmore.redditmeh.ui.commons.BaseFragmentWithSwipeRefreshListener;
-import ellysmore.redditmeh.ui.commons.DividerItemDecoration;
 import ellysmore.redditmeh.ui.listing.adapters.ListingRecyclerAdapter;
 import ellysmore.redditmeh.ui.models.ListingType;
 import ellysmore.redditmeh.ui.models.SubredditType;
@@ -27,11 +25,12 @@ public class ListingFragment extends BaseFragmentWithSwipeRefreshListener {
 
     private static final String TAG = ListingFragment.class.getSimpleName();
 
-    private static final String PARAM_SUBREDDIT_NAME = "PARAM_SUBREDDIT_NAME";
+    public static final String EXTRA_SUBREDDIT_NAME = "EXTRA_SUBREDDIT_NAME";
+
+    public static final String EXTRA_LISTING_TYPE = "EXTRA_LISTING_TYPE";
 
     @Bind(R.id.progress_bar)
     protected ProgressBar mProgressBar;
-
 
     @Bind(R.id.swipe_container)
     protected SwipeRefreshLayout mSwipeRefreshLayout;
@@ -42,16 +41,28 @@ public class ListingFragment extends BaseFragmentWithSwipeRefreshListener {
     @Bind(R.id.list)
     protected RecyclerView mRecyclerView;
 
+    @Bind(R.id.empty_view)
+    protected View mEmptyView;
+
     private View mRootView;
 
-    private SubredditType mSubredditName;
+    private SubredditType mSubreddit;
+
+    private ListingType mListingType;
 
     private ListingRecyclerAdapter mAdapter;
 
-    public static ListingFragment newInstance(SubredditType type) {
+    public static ListingFragment newInstance(Bundle bundle) {
+        ListingFragment listingFragment = new ListingFragment();
+        listingFragment.setArguments(bundle);
+        return listingFragment;
+    }
+
+    public static ListingFragment newInstance(SubredditType subreddit, ListingType listingType) {
         ListingFragment listingFragment = new ListingFragment();
         Bundle bundle = new Bundle();
-        bundle.putString(PARAM_SUBREDDIT_NAME, type.toString());
+        bundle.putString(EXTRA_SUBREDDIT_NAME, subreddit.toString());
+        bundle.putString(EXTRA_LISTING_TYPE, listingType.toString());
         listingFragment.setArguments(bundle);
         return listingFragment;
     }
@@ -61,7 +72,8 @@ public class ListingFragment extends BaseFragmentWithSwipeRefreshListener {
         super.onCreate(savedInstanceState);
         Bundle extras = getArguments();
         if (extras != null) {
-            mSubredditName = SubredditType.getType(extras.getString(PARAM_SUBREDDIT_NAME, null));
+            mSubreddit = SubredditType.getType(extras.getString(EXTRA_SUBREDDIT_NAME, null));
+            mListingType = ListingType.getType(extras.getString(EXTRA_LISTING_TYPE, null));
         }
     }
 
@@ -70,6 +82,7 @@ public class ListingFragment extends BaseFragmentWithSwipeRefreshListener {
             Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.fragment_listing, container, false);
         ButterKnife.bind(this, mRootView);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
         setUpSwipeRefreshColorScheme(mSwipeRefreshLayout);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -89,15 +102,17 @@ public class ListingFragment extends BaseFragmentWithSwipeRefreshListener {
      * This must be fetched first before fetching next set of data.
      */
     private void fetchListing() {
-        NetworkClient.getInstance().getListing(mSubredditName, ListingType.HOT).subscribe(
-                listing -> {
-                    Log.v("eee", "listing: " + listing);
+        NetworkClient.getInstance()
+                .getListing(mSubreddit, mListingType)
+                .doOnNext(notification -> showLoading())
+                .finallyDo(this::hideLoading)
+                .subscribe(listing -> {
+                    if (listing.getChildren().getPosts().isEmpty()) {
+                        mEmptyView.setVisibility(View.VISIBLE);
+                    }
+                    mAdapter.clear();
                     mAdapter.setPosts(listing.getChildren().getPosts());
-                    mAdapter.notifyDataSetChanged();
-                }, throwable -> {
-                    Toast.makeText(getActivity(), throwable.getMessage(), Toast.LENGTH_SHORT)
-                            .show();
-                });
+                }, this::onError);
     }
 
     private void onSuccessFetchingInitialListing(Listing subredditListing) {
@@ -109,15 +124,9 @@ public class ListingFragment extends BaseFragmentWithSwipeRefreshListener {
     }
 
     private void onError(Throwable error) {
-
-    }
-
-    private void showContentLoading() {
-
-    }
-
-    private void hideContentLoading() {
-
+        Toast.makeText(getActivity(), error.getMessage(),
+                Toast.LENGTH_SHORT)
+                .show();
     }
 
     private void showFooterLoading() {
@@ -125,6 +134,16 @@ public class ListingFragment extends BaseFragmentWithSwipeRefreshListener {
     }
 
     private void hideFooterLoading() {
-        ;
+
+    }
+
+    private void showLoading() {
+        mEmptyView.setVisibility(View.GONE);
+        mProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    private void hideLoading() {
+        mProgressBar.setVisibility(View.GONE);
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 }

@@ -18,8 +18,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 import ellysmore.redditmeh.R;
-import ellysmore.redditmeh.ui.navigation.adapters.NavigationListAdapter;
 import ellysmore.redditmeh.ui.models.SubredditType;
+import ellysmore.redditmeh.ui.navigation.adapters.NavigationListAdapter;
 
 public class NavigationDrawerFragment extends Fragment {
 
@@ -57,8 +57,7 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        mRootView = inflater.inflate(
-                R.layout.fragment_navigation_drawer, container, false);
+        mRootView = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
         ButterKnife.bind(this, mRootView);
         mNavigationListAdapter = new NavigationListAdapter(setUpNavigationDrawer(), true);
         mNavigationList.setAdapter(mNavigationListAdapter);

@@ -9,7 +9,6 @@ import ellysmore.redditmeh.api.models.BaseModel;
  */
 public class Listing extends BaseModel {
 
-    //TODO: Some fields from response come back as different datatype.
     private String kind;
 
     @SerializedName("data")

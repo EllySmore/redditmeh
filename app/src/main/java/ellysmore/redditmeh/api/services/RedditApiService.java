@@ -11,7 +11,7 @@ public interface RedditApiService {
 
     @GET("{path}/{listing}.json")
     Observable<Listing> getSubRedditListing(
-            @Path("path") String path,
+            @Path(value = "path", encoded = false) String path,
             @Path("listing") String listing
     );
 

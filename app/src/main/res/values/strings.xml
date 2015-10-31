@@ -20,5 +20,6 @@
     <string name="x_comments">%d comments</string>
     <string name="xtime">%s ago</string>
     <string name="x_bullet_y">%1$s \u2022 %2$s</string>
+    <string name="empty_text">Nothing here but chickens.</string>
 
 </resources>

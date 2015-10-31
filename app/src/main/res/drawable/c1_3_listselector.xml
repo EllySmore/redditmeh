@@ -4,6 +4,6 @@
     <!-- pressed state. -->
     <item android:drawable="@drawable/white_15_drawable" android:state_pressed="true" />
     <!-- Selected state. -->
-    <item android:drawable="@drawable/c1_2_drawable" android:state_pressed="false" android:state_selected="true" />
+    <item android:drawable="@drawable/c1_2_drawable" android:state_selected="true" />
 
 </selector>

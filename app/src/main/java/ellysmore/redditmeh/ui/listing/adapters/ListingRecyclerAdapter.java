@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ellysmore.redditmeh.R;
@@ -62,5 +61,18 @@ public class ListingRecyclerAdapter extends RecyclerView.Adapter<ListingViewHold
 
     public void setPosts(List<Post> posts) {
         mPosts = posts;
+        notifyDataSetChanged();
+    }
+
+    public void addPosts(List<Post> posts) {
+        mPosts.addAll(posts);
+        notifyDataSetChanged();
+    }
+
+    public void clear() {
+        if (mPosts != null) {
+            mPosts.clear();
+            notifyDataSetChanged();
+        }
     }
 }

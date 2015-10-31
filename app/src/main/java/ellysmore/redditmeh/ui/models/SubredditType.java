@@ -9,7 +9,7 @@ public enum SubredditType {
     FUNNY("r/funny", R.drawable.nav_funny, R.string.funny),
     PICS("r/pics", R.drawable.nav_pics, R.string.pics),
     PROGRAMMING("r/programming", R.drawable.nav_programming, R.string.programming),
-    SHOWER_THOUGHTS("r/showerthoughts", R.drawable.nav_shower_thoughts, R.string.shower_thoughts),;
+    SHOWER_THOUGHTS("r/showerthoughts", R.drawable.nav_shower_thoughts, R.string.shower_thoughts);
 
     private final int mTitleResId;
 

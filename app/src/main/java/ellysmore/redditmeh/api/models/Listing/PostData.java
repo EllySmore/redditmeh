@@ -1,8 +1,5 @@
 package ellysmore.redditmeh.api.models.Listing;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonPrimitive;
-
 import ellysmore.redditmeh.api.models.BaseModel;
 
 public class PostData extends BaseModel {
@@ -11,17 +8,9 @@ public class PostData extends BaseModel {
 
     private String domain;
 
-    private MediaEmbed media_embed;
-
     private String subreddit;
 
-    private Media secure_media;
-
-    private MediaEmbed secure_media_embed;
-
     private String author;
-
-    private Media media;
 
     private int score;
 
@@ -29,13 +18,9 @@ public class PostData extends BaseModel {
 
     private boolean over_18;
 
-    private boolean hidden;
-
     private String thumbnail;
 
     private String subreddit_id;
-
-    private JsonElement edited;
 
     private int downs;
 
@@ -55,28 +40,14 @@ public class PostData extends BaseModel {
 
     private int num_comments;
 
-    private boolean visited;
-
     private int num_reports;
 
     public String getDomain() {
         return domain;
     }
 
-    public MediaEmbed getMediaEmbed() {
-        return media_embed;
-    }
-
     public String getSubreddit() {
         return subreddit;
-    }
-
-    public Media getSecureMedia() {
-        return secure_media;
-    }
-
-    public MediaEmbed getSecureMediaEmbed() {
-        return secure_media_embed;
     }
 
     public String getId() {
@@ -85,10 +56,6 @@ public class PostData extends BaseModel {
 
     public String getAuthor() {
         return author;
-    }
-
-    public Media getMedia() {
-        return media;
     }
 
     public int getScore() {
@@ -103,29 +70,12 @@ public class PostData extends BaseModel {
         return over_18;
     }
 
-    public boolean isHidden() {
-        return hidden;
-    }
-
     public String getThumbnail() {
         return thumbnail;
     }
 
     public String getSubredditId() {
         return subreddit_id;
-    }
-
-    public Boolean getEdited() {
-        Boolean isEdited = false;
-        if (edited.isJsonPrimitive()) {
-            JsonPrimitive object = edited.getAsJsonPrimitive();
-            if (object.isNumber()) {
-                long value = object.getAsLong();
-            } else if (object.isBoolean()) {
-                isEdited = object.getAsBoolean();
-            }
-        }
-        return isEdited;
     }
 
     public int getDowns() {
@@ -180,35 +130,4 @@ public class PostData extends BaseModel {
         return id != null ? id.hashCode() : 0;
     }
 
-    @Override
-    public String toString() {
-        return "PostData{" +
-                "id='" + id + '\'' +
-                ", domain='" + domain + '\'' +
-                ", media_embed=" + media_embed +
-                ", subreddit='" + subreddit + '\'' +
-                ", secure_media=" + secure_media +
-                ", secure_media_embed=" + secure_media_embed +
-                ", author='" + author + '\'' +
-                ", media=" + media +
-                ", score=" + score +
-                ", approved_by='" + approved_by + '\'' +
-                ", over_18=" + over_18 +
-                ", hidden=" + hidden +
-                ", thumbnail='" + thumbnail + '\'' +
-                ", subreddit_id='" + subreddit_id + '\'' +
-                ", edited=" + edited +
-                ", downs=" + downs +
-                ", name='" + name + '\'' +
-                ", permalink='" + permalink + '\'' +
-                ", created=" + created +
-                ", url='" + url + '\'' +
-                ", title='" + title + '\'' +
-                ", created_utc=" + created_utc +
-                ", ups=" + ups +
-                ", num_comments=" + num_comments +
-                ", visited=" + visited +
-                ", num_reports=" + num_reports +
-                '}';
-    }
 }
