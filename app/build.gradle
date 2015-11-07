@@ -36,9 +36,8 @@ def javaHomeForVersion = { version ->
 }
 
 retrolambda {
-    javaVersion JavaVersion.VERSION_1_7
-    jdk javaHomeForVersion(8)
-    oldJdk javaHomeForVersion(7)
+    jdk "C:\\Program Files\\Java\\jdk1.8.0_65"
+    oldJdk "C:\\Program Files\\Java\\jdk1.7.0_71"
 }
 
 repositories {
