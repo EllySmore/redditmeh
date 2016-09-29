@@ -32,9 +32,13 @@ public class NavigationActivity extends BaseActivity implements
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mNavigationDrawerFragment.setUp(mDrawerLayout, mToolbar);
         //Initial fragment display frontpage
-        getSupportFragmentManager().beginTransaction()
-                .add(getContainerId(), ListingHostFragment.newInstance(SubredditType.FRONT_PAGE))
-                .commit();
+
+        if (getSupportFragmentManager().getFragments() == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(getContainerId(),
+                            ListingHostFragment.newInstance(SubredditType.FRONT_PAGE))
+                    .commit();
+        }
     }
 
     private int getContainerId() {

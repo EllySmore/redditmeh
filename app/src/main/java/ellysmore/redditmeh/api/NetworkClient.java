@@ -39,4 +39,10 @@ public class NetworkClient {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io());
     }
+
+    public Observable<Listing> getNextListing(SubredditType subreddit, ListingType listingType, String next) {
+        return mRedditApiService.getNextSubredditListing(subreddit.toString(), listingType.toString(), next, 20)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io());
+    }
 }

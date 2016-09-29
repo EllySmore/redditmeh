@@ -2,7 +2,7 @@
 <resources>
     <dimen name="listing_row_height">133dp</dimen>
     <dimen name="listing_title_textsize">15sp</dimen>
-    <dimen name="listing_submitted_textsize">12sp</dimen>
-    <dimen name="listing_button_textsize">10sp</dimen>
-    <dimen name="navigation_bar_width">300dp</dimen>
+    <dimen name="listing_submitted_textsize">13sp</dimen>
+    <dimen name="listing_button_textsize">12sp</dimen>
+    <dimen name="navigation_bar_width">72dp</dimen>
 </resources>

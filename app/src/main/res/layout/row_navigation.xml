@@ -6,7 +6,6 @@
             android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginRight="16dp"
             tools:src="@drawable/ic_launcher"/>
 
     <TextView
@@ -17,6 +16,7 @@
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/icon"
             android:layout_toRightOf="@+id/icon"
+            android:layout_marginLeft="16dp"
             android:fontFamily="sans-serif-light"
             tools:text="EXAMPLE"/>
 
@@ -26,5 +26,11 @@
               android:layout_alignParentEnd="true"
               android:layout_alignParentRight="true"
               android:layout_height="wrap_content"/>
+
+    <View
+            android:layout_height="1dp"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/darker_gray"/>
 
 </merge>

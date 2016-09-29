@@ -36,7 +36,9 @@ public class NavigationItemRow extends RelativeLayout implements Checkable {
 
     public void updateUI(SubredditType navItem) {
         mIcon.setImageDrawable(getResources().getDrawable(navItem.getIconResId()));
-        mTitle.setText(navItem.toString());
+        if (!getContext().getResources().getBoolean(R.bool.is_tablet)) {
+            mTitle.setText(navItem.toString());
+        }
     }
 
     @Override
