@@ -1,12 +1,13 @@
 package ellysmore.redditmeh.ui.commons;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class BaseFragment extends android.support.v4.app.Fragment {
+public class BaseFragment extends Fragment {
 
     private String TAG = this.getClass().getSimpleName();
 

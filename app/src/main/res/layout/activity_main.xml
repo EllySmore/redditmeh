@@ -26,12 +26,11 @@
     </LinearLayout>
 
     <!-- The navigation drawer -->
-    <fragment
-        android:id="@+id/navigation_drawer"
-        android:name="ellysmore.redditmeh.ui.navigation.NavigationDrawerFragment"
-        android:layout_width="@dimen/navigation_bar_width"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        tools:layout="@layout/fragment_navigation_drawer"></fragment>
+    <FrameLayout
+            android:id="@+id/navigation_drawer"
+            android:layout_width="@dimen/navigation_bar_width"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            tools:layout="@layout/fragment_navigation_drawer"/>
 
 </android.support.v4.widget.DrawerLayout>

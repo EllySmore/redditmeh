@@ -9,16 +9,16 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import ellysmore.redditmeh.R;
 
 public class FlatButton extends RelativeLayout {
 
-    @Bind(R.id.icon)
+    @BindView(R.id.icon)
     protected ImageView mIcon;
 
-    @Bind(R.id.text)
+    @BindView(R.id.text)
     protected TextView mText;
 
     public FlatButton(Context context) {

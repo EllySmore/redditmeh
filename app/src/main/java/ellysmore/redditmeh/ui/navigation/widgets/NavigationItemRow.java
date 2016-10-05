@@ -7,17 +7,17 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import ellysmore.redditmeh.R;
 import ellysmore.redditmeh.ui.models.SubredditType;
 
 public class NavigationItemRow extends RelativeLayout implements Checkable {
 
-    @Bind(R.id.icon)
+    @BindView(R.id.icon)
     protected ImageView mIcon;
 
-    @Bind(R.id.title)
+    @BindView(R.id.title)
     protected TextView mTitle;
 
     public NavigationItemRow(Context context) {

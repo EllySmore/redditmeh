@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import ellysmore.redditmeh.ui.listing.ListingFragment;
 import ellysmore.redditmeh.ui.models.ListingType;
@@ -13,7 +14,7 @@ import static ellysmore.redditmeh.ui.listing.ListingFragment.EXTRA_LISTING_TYPE;
 import static ellysmore.redditmeh.ui.listing.ListingFragment.EXTRA_SUBREDDIT_NAME;
 import static ellysmore.redditmeh.ui.models.ListingType.values;
 
-public class ListingFragmentViewPager extends FragmentPagerAdapter {
+public class ListingFragmentViewPager extends FragmentStatePagerAdapter {
 
     private SubredditType mSubRedditType;
 

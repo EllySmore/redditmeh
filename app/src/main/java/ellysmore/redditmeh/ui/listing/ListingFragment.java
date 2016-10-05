@@ -4,31 +4,24 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import java.util.concurrent.TimeUnit;
-
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import ellysmore.redditmeh.R;
 import ellysmore.redditmeh.api.NetworkClient;
-import ellysmore.redditmeh.api.models.Listing.Listing;
-import ellysmore.redditmeh.ui.commons.BaseFragmentWithSwipeRefreshListener;
+import ellysmore.redditmeh.ui.commons.BaseFragment;
 import ellysmore.redditmeh.ui.listing.adapters.ListingRecyclerAdapter;
 import ellysmore.redditmeh.ui.models.ListingType;
 import ellysmore.redditmeh.ui.models.SubredditType;
 import ellysmore.redditmeh.ui.widgets.Footer;
-import rx.Observable;
-import rx.functions.Action1;
-import rx.subjects.PublishSubject;
-import rx.subjects.ReplaySubject;
 
-public class ListingFragment extends BaseFragmentWithSwipeRefreshListener {
+public class ListingFragment extends BaseFragment
+        implements SwipeRefreshLayout.OnRefreshListener {
 
     private static final String TAG = ListingFragment.class.getSimpleName();
 
@@ -36,27 +29,23 @@ public class ListingFragment extends BaseFragmentWithSwipeRefreshListener {
 
     public static final String EXTRA_LISTING_TYPE = "EXTRA_LISTING_TYPE";
 
-    @Bind(R.id.progress_bar)
-    protected ProgressBar mProgressBar;
+    @BindView(R.id.progress_bar)
+    ProgressBar mProgressBar;
 
-    @Bind(R.id.swipe_container)
-    protected SwipeRefreshLayout mSwipeRefreshLayout;
+    @BindView(R.id.swipe_container)
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
-    @Bind(R.id.footer)
-    protected Footer mFooter;
+    @BindView(R.id.footer)
+    Footer mFooter;
 
-    @Bind(R.id.list)
-    protected RecyclerView mRecyclerView;
+    @BindView(R.id.list)
+    RecyclerView mRecyclerView;
 
-    @Bind(R.id.empty_view)
-    protected View mEmptyView;
-
-    private View mRootView;
+    @BindView(R.id.empty_view)
+    View mEmptyView;
 
     private SubredditType mSubreddit;
-
     private ListingType mListingType;
-
     private ListingRecyclerAdapter mAdapter;
 
     public static ListingFragment newInstance(Bundle bundle) {
@@ -87,10 +76,8 @@ public class ListingFragment extends BaseFragmentWithSwipeRefreshListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        mRootView = inflater.inflate(R.layout.fragment_listing, container, false);
-        ButterKnife.bind(this, mRootView);
-        mSwipeRefreshLayout.setOnRefreshListener(this);
-        setUpSwipeRefreshColorScheme(mSwipeRefreshLayout);
+        View rootView = inflater.inflate(R.layout.fragment_listing, container, false);
+        ButterKnife.bind(this, rootView);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -107,15 +94,12 @@ public class ListingFragment extends BaseFragmentWithSwipeRefreshListener {
         });
         mAdapter = new ListingRecyclerAdapter(getActivity());
         mRecyclerView.setAdapter(mAdapter);
-        onRefresh();
-        ReplaySubject.create();
         mRecyclerView.scrollToPosition(0);
-        return mRootView;
+        return rootView;
     }
 
     @Override
     public void onRefresh() {
-        super.onRefresh();
         fetchListing();
     }
 
@@ -126,7 +110,7 @@ public class ListingFragment extends BaseFragmentWithSwipeRefreshListener {
         NetworkClient.getInstance()
                 .getListing(mSubreddit, mListingType)
                 .doOnNext(notification -> showLoading())
-                .finallyDo(this::hideLoading)
+                .doAfterTerminate(this::hideLoading)
                 .subscribe(listing -> {
                     if (listing.getChildren().getPosts().isEmpty()) {
                         mEmptyView.setVisibility(View.VISIBLE);
@@ -134,22 +118,6 @@ public class ListingFragment extends BaseFragmentWithSwipeRefreshListener {
                     mAdapter.clear();
                     mAdapter.setPosts(listing.getChildren().getPosts());
 
-                }, this::onError);
-    }
-
-
-    private void onSuccessFetchingNextListing(String next) {
-
-        // need to combine those suggestions to work
-        Observable.timer(1000, TimeUnit.MILLISECONDS) // second suggestion
-                .toBlocking(); // first suggestion
-
-
-        NetworkClient.getInstance().getNextListing(mSubreddit, mListingType, next).cache()
-                .doOnNext(listing -> showFooterLoading())
-                .finallyDo(()->hideFooterLoading())
-                .subscribe(listing -> {
-                    mAdapter.addPosts(listing.getChildren().getPosts());
                 }, this::onError);
     }
 

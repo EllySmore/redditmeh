@@ -5,13 +5,14 @@ import ellysmore.redditmeh.api.models.Listing.Listing;
 import ellysmore.redditmeh.api.services.RedditApiService;
 import ellysmore.redditmeh.ui.models.ListingType;
 import ellysmore.redditmeh.ui.models.SubredditType;
-import retrofit.GsonConverterFactory;
-import retrofit.Retrofit;
-import retrofit.RxJavaCallAdapterFactory;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
+/**
+ * Update service using oauth2
+ */
 public class NetworkClient {
 
     private static NetworkClient mInstance = null;
@@ -35,14 +36,13 @@ public class NetworkClient {
     }
 
     public Observable<Listing> getListing(SubredditType subreddit, ListingType listingType) {
-        return mRedditApiService.getSubRedditListing(subreddit.getPath(), listingType.getPath())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io());
+        return mRedditApiService.getSubRedditListing(subreddit.getPath(), listingType.getPath());
     }
 
-    public Observable<Listing> getNextListing(SubredditType subreddit, ListingType listingType, String next) {
-        return mRedditApiService.getNextSubredditListing(subreddit.toString(), listingType.toString(), next, 20)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io());
+    public Observable<Listing> getNextListing(SubredditType subreddit, ListingType listingType,
+            String next) {
+        return mRedditApiService
+                .getNextSubredditListing(subreddit.toString(), listingType.toString(), next, 20);
+
     }
 }

@@ -1,7 +1,6 @@
 package ellysmore.redditmeh.ui.navigation;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,20 +13,20 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 import ellysmore.redditmeh.R;
 import ellysmore.redditmeh.ui.models.SubredditType;
 import ellysmore.redditmeh.ui.navigation.adapters.NavigationListAdapter;
 
-public class NavigationDrawerFragment extends Fragment {
+public class NavigationDrawerFragment extends android.support.v4.app.Fragment {
 
     private static final String TAG = NavigationDrawerFragment.class.getSimpleName();
 
     private static final String PARAM_SELECT_POSITION = "PARAM_SELECT_POSITION";
 
-    @Bind(R.id.navigation_list)
+    @BindView(R.id.navigation_list)
     protected ListView mNavigationList;
 
     private ActionBarDrawerToggle mDrawerToggle;

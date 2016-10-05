@@ -2,9 +2,9 @@ package ellysmore.redditmeh.api.services;
 
 import ellysmore.redditmeh.api.ApiPath;
 import ellysmore.redditmeh.api.models.Listing.Listing;
-import retrofit.http.GET;
-import retrofit.http.Path;
-import retrofit.http.Query;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 import rx.Observable;
 
 public interface RedditApiService {

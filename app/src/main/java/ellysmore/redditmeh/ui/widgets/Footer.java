@@ -6,16 +6,16 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import ellysmore.redditmeh.R;
 
 public class Footer extends RelativeLayout {
 
-    @Bind(R.id.progress_bar)
+    @BindView(R.id.progress_bar)
     protected ProgressBar mProgressBar;
 
-    @Bind(R.id.idle_image)
+    @BindView(R.id.idle_image)
     protected ImageView mImage;
 
     public Footer(Context context) {
