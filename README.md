@@ -2,7 +2,11 @@
 redditmeh
 =========
 
+
 Android app that display reddit listings.
+
+#Updated on 10/05/2015:
+- No longer supporting this project. It was a great run. 
 
 Updated on 10/31/2015:
 - Update 3rd party libs
